@@ -1,0 +1,71 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}{{ test_prep.name }} Preparation | GSREC{% endblock %}
+
+{% block content %}
+<section
+    style="height: 50vh; position: relative; display: flex; align-items: center; justify-content: center; color: white; text-align: center; background: linear-gradient(135deg, var(--primary) 0%, var(--dark) 100%);">
+    <div style="position: relative; z-index: 2; padding: 0 20px;">
+        <div
+            style="width: 80px; height: 80px; background: rgba(255,255,255,0.1); border-radius: 24px; display: inline-flex; align-items: center; justify-content: center; font-size: 32px; color: white; margin-bottom: 20px;">
+            <i class="fa-solid {{ test_prep.icon_class }}"></i>
+        </div>
+        <h1
+            style="font-size: 56px; font-weight: 800; text-shadow: 0 10px 30px rgba(0,0,0,0.2); letter-spacing: -2px; color: #FFFFFF;">
+            {{ test_prep.name }} Preparation</h1>
+    </div>
+</section>
+<section class="content-section">
+    <div class="container">
+        <div class="test-prep-grid">
+            <div class="fade-in-section is-visible">
+                <h2 style="font-size: 28px; font-weight: 700; margin-bottom: 20px; color: var(--dark);">About the Exam
+                </h2>
+                <p style="font-size: 16px; line-height: 1.8; color: var(--gray); margin-bottom: 40px;">{{
+                    test_prep.intro }}</p>
+                <h3 style="font-size: 24px; font-weight: 700; margin-bottom: 20px; color: var(--dark);">Exam Format</h3>
+                <div style="display: flex; flex-direction: column; gap: 20px;">
+                    {% for item in test_prep.format_data %}
+                    <div
+                        style="display: flex; gap: 20px; background: #F8FAFC; padding: 20px; border-radius: 14px; border: 1px solid #E2E8F0;">
+                        <div
+                            style="flex-shrink: 0; width: 32px; height: 32px; background: var(--primary); border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: bold;">
+                            {{ forloop.counter }}</div>
+                        <div>
+                            <div style="display: flex; align-items: baseline; gap: 10px; margin-bottom: 6px;">
+                                <h4 style="font-weight: 700; color: var(--dark); font-size: 16px;">{{ item.section }}
+                                </h4>
+                                <span
+                                    style="font-size: 12px; background: #DBEAFE; color: var(--primary); padding: 2px 8px; border-radius: 10px; font-weight: 600;">{{
+                                    item.duration }}</span>
+                            </div>
+                            <p style="font-size: 14px; color: var(--gray); line-height: 1.6;">{{ item.description }}</p>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="fade-in-section is-visible" style="transition-delay: 200ms;">
+                <div
+                    style="background: white; padding: 40px; border-radius: 24px; border: 1px solid #e2e8f0; box-shadow: 0 20px 40px -10px rgba(0,0,0,0.08); position: sticky; top: 90px;">
+                    <form action="{% url 'contact' %}" method="get">
+                        <h3 style="font-size: 22px; font-weight: 700; margin-bottom: 10px; color: var(--dark);">Register
+                            for {{ test_prep.name }}</h3>
+                        <p style="margin-bottom: 20px; color: var(--gray);">Classes starting soon. Secure your seat.</p>
+
+                        <div style="margin-bottom: 15px;">
+                            <input type="text" disabled value="Next Batch: Coming Soon" class="form-input">
+                        </div>
+
+                        <button type="submit" class="btn-primary"
+                            style="width: 100%; justify-content: center; font-size: 15px; padding: 14px;">Inquire
+                            Now</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,68 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}{{ country.name }} | GSREC{% endblock %}
+
+{% block content %}
+<section class="hero-section" style="min-height: 400px; height: 50vh;">
+    {% if country.background_image %}
+    <div
+        style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; z-index: 0; background-image: url('{{ country.background_image.url }}'); background-size: cover; background-position: center;">
+        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5);"></div>
+    </div>
+    {% endif %}
+
+    <div class="container" style="position: relative; z-index: 2;">
+        <h1 class="hero-title" style="margin-bottom: 20px;">Study in {{ country.name }} {{ country.flag_emoji }}</h1>
+    </div>
+</section>
+
+<section class="content-section">
+    <div class="container">
+        <div class="split-layout">
+            <div>
+                <h2 class="section-title" style="text-align: left;">Overview</h2>
+                <p style="font-size: 16px; margin-bottom: 30px; line-height: 1.8;">
+                    {{ country.intro }}
+                </p>
+
+                <h3 style="font-size: 24px; font-weight: 700; margin-bottom: 20px;">Why Study in {{ country.name }}?
+                </h3>
+                <ul style="margin-bottom: 40px;">
+                    {% for fact in country.facts %}
+                    <li style="margin-bottom: 12px; display: flex; gap: 10px; align-items: center;">
+                        <i class="fa-solid fa-check-circle" style="color: var(--primary);"></i> {{ fact }}
+                    </li>
+                    {% endfor %}
+                </ul>
+
+                <h3 style="font-size: 24px; font-weight: 700; margin-bottom: 20px;">Top Universities</h3>
+                <ul style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                    {% for uni in country.universities %}
+                    <li
+                        style="padding: 10px; background: #f8fafc; border-radius: 8px; border-left: 3px solid var(--primary);">
+                        {{ uni }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <div
+                style="background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); height: fit-content;">
+                <h4 style="font-size: 20px; font-weight: 700; margin-bottom: 20px;">Quick Inquiry</h4>
+                <form>
+                    <div style="margin-bottom: 15px;">
+                        <input type="text" placeholder="Full Name" class="form-input">
+                    </div>
+                    <div style="margin-bottom: 15px;">
+                        <input type="email" placeholder="Email Address" class="form-input">
+                    </div>
+                    <div style="margin-bottom: 15px;">
+                        <input type="tel" placeholder="Phone Number" class="form-input">
+                    </div>
+                    <button type="submit" class="btn-primary" style="width: 100%;">Submit Inquiry</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
