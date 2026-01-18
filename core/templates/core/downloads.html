@@ -1,0 +1,36 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}Resources | GSREC{% endblock %}
+
+{% block content %}
+<section style="padding: 120px 0 80px; background: #F8FAFC; text-align: center;">
+    <div class="container">
+        <h1 style="font-size: 42px; font-weight: 800; color: var(--dark); margin-bottom: 20px; letter-spacing: -1px;">
+            Resources Center</h1>
+    </div>
+</section>
+<section class="content-section">
+    <div class="container">
+        <div class="downloads-grid">
+            {% for item in downloads %}
+            <div class="download-card">
+                <div class="download-icon"><i class="fa-solid {{ item.icon_class }}"></i></div>
+                <div style="flex: 1;">
+                    <h4 style="font-size: 16px; font-weight: 700; color: var(--dark); margin-bottom: 4px;">{{ item.title
+                        }}</h4>
+                    <span style="font-size: 12px; color: var(--gray);">{{ item.file_type }} • {{ item.size_label
+                        }}</span>
+                </div>
+                <a href="{{ item.file.url }}" download
+                    style="background: none; border: none; color: var(--gray); cursor: pointer; transition: 0.2s;">
+                    <i class="fa-solid fa-download" style="font-size: 20px;"></i>
+                </a>
+            </div>
+            {% empty %}
+            <p>No downloads available at the moment. Please check back later.</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

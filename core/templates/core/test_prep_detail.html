@@ -1,0 +1,140 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}{{ test_prep.name }} Preparation | GSREC{% endblock %}
+
+{% block content %}
+<style>
+.form-input:focus, .form-select:focus, textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+.form-select {
+    cursor: pointer;
+}
+.registration-form {
+    animation: fadeInUp 0.6s ease-out;
+}
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+</style>
+<section
+    style="height: 50vh; position: relative; display: flex; align-items: center; justify-content: center; color: white; text-align: center; background: linear-gradient(135deg, var(--primary) 0%, var(--dark) 100%);">
+    <div style="position: relative; z-index: 2; padding: 0 20px;">
+        <div
+            style="width: 80px; height: 80px; background: rgba(255,255,255,0.1); border-radius: 24px; display: inline-flex; align-items: center; justify-content: center; font-size: 32px; color: white; margin-bottom: 20px;">
+            <i class="fa-solid {{ test_prep.icon_class }}"></i>
+        </div>
+        <h1
+            style="font-size: 56px; font-weight: 800; text-shadow: 0 10px 30px rgba(0,0,0,0.2); letter-spacing: -2px; color: #FFFFFF;">
+            {{ test_prep.name }} Preparation</h1>
+    </div>
+</section>
+<section class="content-section">
+    <div class="container">
+        <div class="test-prep-grid">
+            <div class="fade-in-section is-visible">
+                <h2 style="font-size: 28px; font-weight: 700; margin-bottom: 20px; color: var(--dark);">About the Exam
+                </h2>
+                <p style="font-size: 16px; line-height: 1.8; color: var(--gray); margin-bottom: 40px;">
+                    {{test_prep.intro}}</p>
+                <h3 style="font-size: 24px; font-weight: 700; margin-bottom: 20px; color: var(--dark);">Exam Format</h3>
+                <div style="display: flex; flex-direction: column; gap: 20px;">
+                    {% for item in test_prep.format_data %}
+                    <div
+                        style="display: flex; gap: 20px; background: #F8FAFC; padding: 20px; border-radius: 14px; border: 1px solid #E2E8F0;">
+                        <div
+                            style="flex-shrink: 0; width: 32px; height: 32px; background: var(--primary); border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: bold;">
+                            {{ forloop.counter }}</div>
+                        <div>
+                            <div style="display: flex; align-items: baseline; gap: 10px; margin-bottom: 6px;">
+                                <h4 style="font-weight: 700; color: var(--dark); font-size: 16px;">{{ item.section }}
+                                </h4>
+                                <span
+                                    style="font-size: 12px; background: #DBEAFE; color: var(--primary); padding: 2px 8px; border-radius: 10px; font-weight: 600;">{{item.duration}}</span>
+                            </div>
+                            <p style="font-size: 14px; color: var(--gray); line-height: 1.6;">{{ item.description }}</p>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="fade-in-section is-visible" style="transition-delay: 200ms;">
+                <div
+                    style="background: white; padding: 40px; border-radius: 24px; border: 1px solid #e2e8f0; box-shadow: 0 20px 40px -10px rgba(0,0,0,0.08); position: sticky; top: 90px;">
+                    <form action="{% url 'test_prep_register' test_prep.slug %}" method="post" id="registration-form" class="registration-form">
+                        {% csrf_token %}
+                        <h3 style="font-size: 22px; font-weight: 700; margin-bottom: 10px; color: var(--dark);">
+                            Register for {{ test_prep.name }}</h3>
+                        <p style="margin-bottom: 20px; color: var(--gray);">Classes starting soon. Secure your seat.</p>
+
+                        <div style="margin-bottom: 15px;">
+                            <label for="name" style="display: block; font-size: 14px; font-weight: 600; color: var(--dark); margin-bottom: 5px;">
+                                Full Name <span style="color: #EF4444;">*</span>
+                            </label>
+                            <input type="text" id="name" name="name" required
+                                class="form-input"
+                                style="width: 100%; padding: 12px 16px; border: 1px solid #D1D5DB; border-radius: 8px; font-size: 14px; transition: border-color 0.2s;"
+                                placeholder="Enter your full name">
+                        </div>
+
+                        <div style="margin-bottom: 15px;">
+                            <label for="phone" style="display: block; font-size: 14px; font-weight: 600; color: var(--dark); margin-bottom: 5px;">
+                                Phone Number <span style="color: #EF4444;">*</span>
+                            </label>
+                            <input type="tel" id="phone" name="phone" required
+                                class="form-input"
+                                style="width: 100%; padding: 12px 16px; border: 1px solid #D1D5DB; border-radius: 8px; font-size: 14px; transition: border-color 0.2s;"
+                                placeholder="Enter your phone number">
+                        </div>
+
+                        <div style="margin-bottom: 15px;">
+                            <label for="email" style="display: block; font-size: 14px; font-weight: 600; color: var(--dark); margin-bottom: 5px;">
+                                Email Address
+                            </label>
+                            <input type="email" id="email" name="email"
+                                class="form-input"
+                                style="width: 100%; padding: 12px 16px; border: 1px solid #D1D5DB; border-radius: 8px; font-size: 14px; transition: border-color 0.2s;"
+                                placeholder="Enter your email address">
+                        </div>
+
+                        <div style="margin-bottom: 15px;">
+                            <label for="preferred_time" style="display: block; font-size: 14px; font-weight: 600; color: var(--dark); margin-bottom: 5px;">
+                                Preferred Time
+                            </label>
+                            <input type="text" id="preferred_time" name="preferred_time"
+                                class="form-input"
+                                style="width: 100%; padding: 12px 16px; border: 1px solid #D1D5DB; border-radius: 8px; font-size: 14px; transition: border-color 0.2s;"
+                                placeholder="e.g., Morning 9 AM, Evening 6 PM, Weekends">
+                        </div>
+
+                        <div style="margin-bottom: 20px;">
+                            <label for="message" style="display: block; font-size: 14px; font-weight: 600; color: var(--dark); margin-bottom: 5px;">
+                                Additional Message
+                            </label>
+                            <textarea id="message" name="message" rows="3"
+                                style="width: 100%; padding: 12px 16px; border: 1px solid #D1D5DB; border-radius: 8px; font-size: 14px; transition: border-color 0.2s; resize: vertical;"
+                                placeholder="Any specific requirements or questions..."></textarea>
+                        </div>
+
+                        <button type="submit" class="btn-primary"
+                            style="width: 100%; justify-content: center; font-size: 15px; padding: 14px;">
+                            Register Now
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

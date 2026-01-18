@@ -1,0 +1,38 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}Success Stories | GSREC{% endblock %}
+
+{% block content %}
+<section style="padding: 120px 0 80px; background: #F8FAFC; text-align: center;">
+    <div class="container">
+        <h1 style="font-size: 42px; font-weight: 800; color: var(--dark); margin-bottom: 20px; letter-spacing: -1px;">
+            Student Success Stories</h1>
+    </div>
+</section>
+<section class="content-section">
+    <div class="container">
+        <div class="grid-responsive">
+            {% for t in testimonials %}
+            <div
+                style="padding: 30px; background: white; border-radius: 20px; border: 1px solid rgba(0,0,0,0.03); height: 100%;">
+                <div style="display: flex; gap: 15px; align-items: center; margin-bottom: 20px;">
+                    {% if t.image %}
+                    <img src="{{ t.image.url }}"
+                        style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover;" alt="{{ t.name }}">
+                    {% else %}
+                    <div style="width: 50px; height: 50px; border-radius: 50%; background: #eee;"></div>
+                    {% endif %}
+                    <div>
+                        <h4 style="font-weight: 700; font-size: 16px; color: var(--dark);">{{ t.name }}</h4>
+                        <div style="font-size: 12px; color: var(--primary); font-weight: 500;">{{ t.university }}</div>
+                    </div>
+                </div>
+                <p style="font-style: italic; color: var(--gray); font-size: 14px; line-height: 1.6;">"{{ t.quote }}"
+                </p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}
