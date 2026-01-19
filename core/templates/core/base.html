@@ -1,0 +1,197 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}GSREC | Global Education{% endblock %}</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'core/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'core/css/components.css' %}">
+    {% block extra_css %}{% endblock %}
+</head>
+
+<body>
+
+    <header class="site-header">
+        <div class="container">
+            <nav style="display: flex; justify-content: space-between; align-items: center; height: 64px;">
+                <a href="{% url 'index' %}" class="site-logo">
+                    <div class="logo-icon">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                    </div>
+                    GSREC NEPAL
+                </a>
+
+                <button class="mobile-menu-btn">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+
+                <div class="nav-links-container">
+                    <div class="nav-item-wrapper">
+                        <a href="{% url 'index' %}"
+                            class="nav-item {% if request.resolver_match.url_name == 'index' %}active{% endif %}">
+                            Home
+                        </a>
+                    </div>
+
+                    <!-- Study In Dropdown -->
+                    <div class="nav-item-wrapper dropdown-wrapper">
+                        <div class="nav-item {% if 'study' in request.path %}active{% endif %}">
+                            <span>Study In</span>
+                            <span class="dropdown-chevron"><i class="fa-solid fa-chevron-down"></i></span>
+                        </div>
+                        <div class="dropdown-menu">
+                            <a href="{% url 'destination_list' %}" class="dropdown-item view-all">View All</a>
+                            <div class="dropdown-divider"></div>
+                            {% for country in global_countries %}
+                            <a href="{% url 'destination_detail' country.slug %}" class="dropdown-item">
+                                <span style="font-size: 18px; margin-right: 8px;">{{ country.flag_emoji }}</span>
+                                {{country.name }}
+                            </a>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <!-- Services Dropdown -->
+                    <div class="nav-item-wrapper dropdown-wrapper">
+                        <div class="nav-item {% if 'services' in request.path %}active{% endif %}">
+                            <span>Services</span>
+                            <span class="dropdown-chevron"><i class="fa-solid fa-chevron-down"></i></span>
+                        </div>
+                        <div class="dropdown-menu">
+                            <a href="{% url 'service_list' %}" class="dropdown-item view-all">View All</a>
+                            <div class="dropdown-divider"></div>
+                            {% for service in global_services %}
+                            <a href="{% url 'service_detail' service.slug %}" class="dropdown-item">
+                                <i class="fa-solid {{ service.icon_class }}"
+                                    style="color: var(--primary); width: 20px;"></i> {{ service.title }}
+                            </a>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <!-- Test Prep Dropdown -->
+                    <div class="nav-item-wrapper dropdown-wrapper">
+                        <div class="nav-item {% if 'test-prep' in request.path %}active{% endif %}">
+                            <span>Test Prep</span>
+                            <span class="dropdown-chevron"><i class="fa-solid fa-chevron-down"></i></span>
+                        </div>
+                        <div class="dropdown-menu">
+                            <a href="{% url 'test_prep_list' %}" class="dropdown-item view-all">View All</a>
+                            <div class="dropdown-divider"></div>
+                            {% for test in global_test_preps %}
+                            <a href="{% url 'test_prep_detail' test.slug %}" class="dropdown-item">
+                                <i class="fa-solid {{ test.icon_class }}"
+                                    style="color: var(--primary); width: 20px;"></i> {{ test.name }}
+                            </a>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <div class="nav-item-wrapper">
+                        <a href="{% url 'success_stories' %}"
+                            class="nav-item {% if request.resolver_match.url_name == 'success_stories' %}active{% endif %}">
+                            Success Stories
+                        </a>
+                    </div>
+
+                    <div class="nav-item-wrapper">
+                        <a href="{% url 'downloads' %}"
+                            class="nav-item {% if request.resolver_match.url_name == 'downloads' %}active{% endif %}">
+                            Downloads
+                        </a>
+                    </div>
+
+                    <div class="nav-item-wrapper">
+                        <a href="{% url 'about' %}"
+                            class="nav-item {% if request.resolver_match.url_name == 'about' %}active{% endif %}">
+                            About Us
+                        </a>
+                    </div>
+
+                    <a href="{% url 'contact' %}" class="btn-primary contact-btn">
+                        Contact <i class="fa-solid fa-arrow-right" style="font-size: 12px"></i>
+                    </a>
+                </div>
+        </div>
+        </nav>
+        </div>
+    </header>
+
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid" style="margin-bottom: 60px;">
+                <div>
+                    <div class="site-logo footer-logo" style="color: white; margin-bottom: 20px;">
+                        <div class="logo-icon">
+                            <i class="fa-solid fa-graduation-cap" style="font-size: 14px;"></i>
+                        </div>
+                        GSREC
+                    </div>
+                    <p style="color: #94A3B8; font-size: 14px; line-height: 1.8;">
+                        Global Student Recruitment & Education Consultancy (GSREC Nepal) is a leading educational
+                        consultancy in Nepal, dedicated to providing ethical and reliable counseling services to
+                        students.
+                    </p>
+                    <div style="display: flex; gap: 15px; margin-top: 30px;">
+                        <!-- Social Icons (static for now) -->
+                        <div class="social-icon"><i class="fa-brands fa-facebook-f"></i></div>
+                        <div class="social-icon"><i class="fa-brands fa-twitter"></i></div>
+                        <div class="social-icon"><i class="fa-brands fa-instagram"></i></div>
+                        <div class="social-icon"><i class="fa-brands fa-linkedin-in"></i></div>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="footer-heading">Company</h4>
+                    <a href="{% url 'about' %}" class="footer-link">About Us</a>
+                    <a href="{% url 'service_list' %}" class="footer-link">Our Services</a>
+                    <a href="{% url 'contact' %}" class="footer-link">Contact</a>
+                    <a href="#" class="footer-link">Privacy Policy</a>
+                </div>
+
+                <div>
+                    <h4 class="footer-heading">Destinations</h4>
+                    {% for country in global_countries|slice:":4" %}
+                    <a href="{% url 'destination_detail' country.slug %}" class="footer-link">{{ country.name }}</a>
+                    {% endfor %}
+                </div>
+
+                <div>
+                    <h4 class="footer-heading">Contact</h4>
+                    <p class="footer-contact-item">
+                        <i class="fa-solid fa-location-dot"></i>
+                        Putalisadak, Kathmandu, Nepal
+                    </p>
+                    <p class="footer-contact-item">
+                        <i class="fa-solid fa-phone"></i>
+                        +977 1-4244XXX
+                    </p>
+                    <p class="footer-contact-item">
+                        <i class="fa-solid fa-envelope"></i>
+                        info@gsrecnepal.com.np
+                    </p>
+                </div>
+            </div>
+
+            <div
+                style="text-align: center; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.05); color: #475569; font-size: 13px;">
+                &copy; 2025 GSREC Nepal. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script src="{% static 'core/js/main.js' %}"></script>
+</body>
+
+</html>

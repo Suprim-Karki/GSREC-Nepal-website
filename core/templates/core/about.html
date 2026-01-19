@@ -1,0 +1,75 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}About Us | GSREC{% endblock %}
+
+{% block content %}
+<section class="content-section" style="background: white;">
+    <div class="container">
+        <div class="fade-in-section is-visible">
+            <h2 class="section-title">About GSREC Nepal</h2>
+            <p class="section-subtitle">Global Student Recruitment & Education Consultancy (GSREC)</p>
+        </div>
+
+        <div class="two-col-grid" style="margin-top: 60px;">
+            <div class="fade-in-section is-visible">
+                <!-- Placeholder image or dynamic if added to models later -->
+                <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
+                    style="width: 100%; border-radius: 24px; box-shadow: 0 20px 40px rgba(0,0,0,0.1);" alt="Team">
+            </div>
+            <div class="fade-in-section is-visible" style="transition-delay: 200ms;">
+                <h3 style="font-size: 28px; font-weight: 700; margin-bottom: 20px; color: var(--dark);">Our Mission</h3>
+                <p style="font-size: 16px; line-height: 1.8; color: var(--gray); margin-bottom: 30px;">At GSREC Nepal,
+                    based in Putalisadak, Kathmandu, we are committed to providing genuine and professional guidance to
+                    students aspiring to study abroad. Our mission is to be the bridge between student aspirations and
+                    global educational opportunities.</p>
+                <div class="two-col-grid" style="gap: 30px;">
+                    <div>
+                        <div style="font-size: 36px; font-weight: 800; color: var(--primary);">5000+</div>
+                        <div style="font-size: 14px; color: var(--gray);">Students Placed</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 36px; font-weight: 800; color: var(--secondary);">98%</div>
+                        <div style="font-size: 14px; color: var(--gray);">Visa Success Rate</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Central Timeline Milestones Section -->
+        {% if milestones %}
+        <div style="margin-top: 60px; position: relative;">
+            <div class="fade-in-section is-visible">
+                <h3 class="section-title" style="margin-bottom: 30px;">Our Journey</h3>
+                <div style="position: relative; max-width: 800px; margin: 0 auto;">
+                    <div
+                        style="position: absolute; left: 50%; transform: translateX(-50%); top: 0; bottom: 0; width: 1px; background: #e2e8f0;">
+                    </div>
+                    {% for milestone in milestones %}
+                    <div style="position: relative; margin-bottom: 30px; width: 100%;">
+                        <!-- Timeline Dot -->
+                        <div
+                            style="position: absolute; left: 50%; transform: translateX(-50%); width: 8px; height: 8px; background: var(--primary); border-radius: 50%; border: 2px solid white; box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2); z-index: 2; top: 16px;">
+                        </div>
+
+                        <!-- Content Box -->
+                        <div
+                            style="width: 38%; background: #f8fafc; padding: 16px; border-radius: 12px; position: relative; box-shadow: 0 4px 16px rgba(0,0,0,0.05); border: 1px solid #e2e8f0; margin-left: {% if forloop.counter|divisibleby:2 %}62%{% else %}0{% endif %};">
+                            <div
+                                style="display: inline-block; padding: 3px 10px; background: var(--primary); color: white; border-radius: 12px; font-size: 11px; font-weight: 600; margin-bottom: 6px;">
+                                {{ milestone.year }}</div>
+                            <h4 style="font-size: 16px; font-weight: 700; color: var(--dark); margin-bottom: 4px;">
+                                {{milestone.title }}</h4>
+                            <p style="color: var(--gray); font-size: 13px; line-height: 1.4;">{{ milestone.description}}
+                            </p>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+    </div>
+</section>
+{% endblock %}

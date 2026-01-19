@@ -1,0 +1,39 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}Our Services | GSREC{% endblock %}
+
+{% block content %}
+<section style="padding: 120px 0 80px; background: #F8FAFC; text-align: center;">
+    <div class="container">
+        <h1 style="font-size: 42px; font-weight: 800; color: var(--dark); margin-bottom: 20px; letter-spacing: -1px;">
+            Our Expert Services</h1>
+    </div>
+</section>
+<section class="content-section">
+    <div class="container">
+        <div class="grid-responsive">
+            {% for service in services %}
+            <a href="{% url 'service_detail' service.slug %}" class="feature-card">
+                <div
+                    style="height: 180px; background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); display: flex; align-items: center; justify-content: center;">
+                    <div
+                        style="width: 80px; height: 80px; background: rgba(255,255,255,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                        <i class="fa-solid {{ service.icon_class }}" style="font-size: 32px; color: white;"></i>
+                    </div>
+                </div>
+                <div style="padding: 24px 30px 30px; flex: 1; display: flex; flex-direction: column;">
+                    <h3 style="font-size: 20px; font-weight: 700; margin-bottom: 8px; color: var(--dark);">
+                        {{service.title }}</h3>
+                    <p style="color: var(--gray); margin-bottom: 20px; font-size: 15px; line-height: 1.6; flex: 1;">
+                        {{service.intro|truncatechars:100 }}</p>
+                    <div
+                        style="background: transparent; border: none; color: var(--primary); font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 8px; font-size: 14px;">
+                        View Details <i class="fa-solid fa-arrow-right"></i></div>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}
