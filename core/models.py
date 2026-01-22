@@ -137,3 +137,22 @@ class Milestone(models.Model):
 
     def __str__(self):
         return f"{self.year}: {self.title}"
+
+class SiteSettings(models.Model):
+    site_name = models.CharField(max_length=100, default="GSREC NEPAL")
+    logo = models.ImageField(upload_to='site/', blank=True, null=True, help_text="Main logo for Header")
+    footer_logo = models.ImageField(upload_to='site/', blank=True, null=True, help_text="Logo for Footer. Defaults to main logo if not set.")
+    favicon = models.ImageField(upload_to='site/', blank=True, null=True)
+
+    def save(self, *args, **kwargs):
+        if not self.pk and SiteSettings.objects.exists():
+            # If you want to ensure only one instance exists, you can handle it here, 
+            # or just rely on using .first() in views/context.
+            pass
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return self.site_name
+
+    class Meta:
+        verbose_name_plural = "Site Settings"

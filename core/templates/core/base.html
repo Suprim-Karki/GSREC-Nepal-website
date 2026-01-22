@@ -21,9 +21,13 @@
         <div class="container">
             <nav style="display: flex; justify-content: space-between; align-items: center; height: 64px;">
                 <a href="{% url 'index' %}" class="site-logo">
+                    {% if site_settings.logo %}
+                    <img src="{{ site_settings.logo.url }}" alt="{{ site_settings.site_name }}" style="height: 50px;">
+                    {% else %}
                     <div class="logo-icon">
                         <i class="fa-solid fa-graduation-cap"></i>
                     </div>
+                    {% endif %}
                     GSREC NEPAL
                 </a>
 
@@ -133,10 +137,18 @@
             <div class="footer-grid" style="margin-bottom: 60px;">
                 <div>
                     <div class="site-logo footer-logo" style="color: white; margin-bottom: 20px;">
+                        {% if site_settings.footer_logo %}
+                        <img src="{{ site_settings.footer_logo.url }}" alt="{{ site_settings.site_name }}"
+                            style="height: 40px; filter: brightness(0) invert(1);">
+                        {% elif site_settings.logo %}
+                        <img src="{{ site_settings.logo.url }}" alt="{{ site_settings.site_name }}"
+                            style="height: 40px; filter: brightness(0) invert(1);">
+                        {% else %}
                         <div class="logo-icon">
                             <i class="fa-solid fa-graduation-cap" style="font-size: 14px;"></i>
                         </div>
                         GSREC
+                        {% endif %}
                     </div>
                     <p style="color: #94A3B8; font-size: 14px; line-height: 1.8;">
                         Global Student Recruitment & Education Consultancy (GSREC Nepal) is a leading educational

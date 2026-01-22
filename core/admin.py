@@ -1,5 +1,14 @@
 from django.contrib import admin
-from .models import HeroSection, Country, Service, TestPrep, Testimonial, Download, Partner, Milestone, Feature, Stat
+from .models import HeroSection, Country, Service, TestPrep, Testimonial, Download, Partner, Milestone, Feature, Stat, SiteSettings
+
+@admin.register(SiteSettings)
+class SiteSettingsAdmin(admin.ModelAdmin):
+    list_display = ('site_name',)
+
+    def has_add_permission(self, request):
+        if self.model.objects.exists():
+            return False
+        return super().has_add_permission(request)
 
 @admin.register(HeroSection)
 class HeroSectionAdmin(admin.ModelAdmin):
