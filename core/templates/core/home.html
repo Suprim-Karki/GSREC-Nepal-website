@@ -186,10 +186,13 @@
 
         .journey-step-item {
             width: 100%;
-            display: flex;
-            align-items: flex-start;
+            display: grid;
+            grid-template-columns: 80px 1fr;
+            grid-template-rows: auto auto;
+            gap: 10px 20px;
+            /* row-gap col-gap */
             text-align: left;
-            gap: 20px;
+            align-items: start;
         }
 
         .journey-step-item:hover {
@@ -198,8 +201,23 @@
 
         .journey-icon-box {
             margin: 0;
+            grid-row: 1 / -1;
+            /* Span all rows */
             /* Reset auto margin */
             flex-shrink: 0;
+        }
+
+        .journey-title {
+            align-self: end;
+            /* Align to bottom of icon top half */
+            margin-bottom: 0;
+            line-height: 1.2;
+        }
+
+        .journey-desc {
+            grid-column: 2;
+            padding: 0;
+            /* Remove padding if any */
         }
     }
 </style>

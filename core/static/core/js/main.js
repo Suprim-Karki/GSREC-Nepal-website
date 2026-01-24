@@ -19,22 +19,30 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Dropdown Logic for Mobile
     const dropdownWrappers = document.querySelectorAll('.dropdown-wrapper');
-    if (window.innerWidth <= 1100) {
-        dropdownWrappers.forEach(wrapper => {
-            const trigger = wrapper.querySelector('.nav-item');
-            const menu = wrapper.querySelector('.dropdown-menu');
 
-            trigger.addEventListener('click', function (e) {
+    // Helper to check if we are in mobile view
+    const isMobileView = () => window.innerWidth <= 1024; // Matching CSS breakpoint
+
+    dropdownWrappers.forEach(wrapper => {
+        const trigger = wrapper.querySelector('.nav-item');
+        const menu = wrapper.querySelector('.dropdown-menu'); // Note: logic assumes this exists
+
+        trigger.addEventListener('click', function (e) {
+            // Only toggle on mobile (or let CSS handle hover on desktop)
+            // If we are in mobile view, we want click-to-toggle
+            if (isMobileView()) {
                 e.preventDefault();
+
                 // Close others
                 dropdownWrappers.forEach(other => {
                     if (other !== wrapper) {
-                        other.querySelector('.dropdown-menu').classList.remove('mobile-visible');
+                        const otherMenu = other.querySelector('.dropdown-menu');
+                        if (otherMenu) otherMenu.classList.remove('mobile-visible');
                     }
                 });
 
-                menu.classList.toggle('mobile-visible');
-            });
+                if (menu) menu.classList.toggle('mobile-visible');
+            }
         });
-    }
+    });
 });
