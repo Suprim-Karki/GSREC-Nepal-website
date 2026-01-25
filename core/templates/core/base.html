@@ -46,7 +46,7 @@
                     <!-- Study In Dropdown -->
                     <div class="nav-item-wrapper dropdown-wrapper">
                         <div class="nav-item {% if 'study' in request.path %}active{% endif %}">
-                            <span>Study In</span>
+                            <a href="{% url 'destination_list' %}" class="dropdown-text">Study In</a>
                             <span class="dropdown-chevron"><i class="fa-solid fa-chevron-down"></i></span>
                         </div>
                         <div class="dropdown-menu">
@@ -64,7 +64,7 @@
                     <!-- Services Dropdown -->
                     <div class="nav-item-wrapper dropdown-wrapper">
                         <div class="nav-item {% if 'services' in request.path %}active{% endif %}">
-                            <span>Services</span>
+                            <a href="{% url 'service_list' %}" class="dropdown-text">Services</a>
                             <span class="dropdown-chevron"><i class="fa-solid fa-chevron-down"></i></span>
                         </div>
                         <div class="dropdown-menu">
@@ -82,7 +82,7 @@
                     <!-- Test Prep Dropdown -->
                     <div class="nav-item-wrapper dropdown-wrapper">
                         <div class="nav-item {% if 'test-prep' in request.path %}active{% endif %}">
-                            <span>Test Prep</span>
+                            <a href="{% url 'test_prep_list' %}" class="dropdown-text">Test Prep</a>
                             <span class="dropdown-chevron"><i class="fa-solid fa-chevron-down"></i></span>
                         </div>
                         <div class="dropdown-menu">

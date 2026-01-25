@@ -17,32 +17,34 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // Dropdown Logic for Mobile
+    // Dropdown Logic for Mobile - Toggle only on chevron click
     const dropdownWrappers = document.querySelectorAll('.dropdown-wrapper');
 
     // Helper to check if we are in mobile view
     const isMobileView = () => window.innerWidth <= 1024; // Matching CSS breakpoint
 
     dropdownWrappers.forEach(wrapper => {
-        const trigger = wrapper.querySelector('.nav-item');
-        const menu = wrapper.querySelector('.dropdown-menu'); // Note: logic assumes this exists
+        const chevron = wrapper.querySelector('.dropdown-chevron');
+        const menu = wrapper.querySelector('.dropdown-menu');
 
-        trigger.addEventListener('click', function (e) {
-            // Only toggle on mobile (or let CSS handle hover on desktop)
-            // If we are in mobile view, we want click-to-toggle
-            if (isMobileView()) {
-                e.preventDefault();
+        if (chevron && menu) {
+            chevron.addEventListener('click', function (e) {
+                // Only toggle on mobile (or let CSS handle hover on desktop)
+                if (isMobileView()) {
+                    e.preventDefault();
+                    e.stopPropagation(); // Prevent event from bubbling
 
-                // Close others
-                dropdownWrappers.forEach(other => {
-                    if (other !== wrapper) {
-                        const otherMenu = other.querySelector('.dropdown-menu');
-                        if (otherMenu) otherMenu.classList.remove('mobile-visible');
-                    }
-                });
+                    // Close others
+                    dropdownWrappers.forEach(other => {
+                        if (other !== wrapper) {
+                            const otherMenu = other.querySelector('.dropdown-menu');
+                            if (otherMenu) otherMenu.classList.remove('mobile-visible');
+                        }
+                    });
 
-                if (menu) menu.classList.toggle('mobile-visible');
-            }
-        });
+                    menu.classList.toggle('mobile-visible');
+                }
+            });
+        }
     });
 });
