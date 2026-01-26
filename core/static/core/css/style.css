@@ -6,8 +6,8 @@
     /* Vibrant Orange */
     --dark: #0F172A;
     /* Slate 900 */
-    --light: #F8FAFC;
-    /* Slate 50 */
+    --light: #ffffff;
+    /* Pure White */
     --white: #ffffff;
     --gray: #64748B;
 }
@@ -356,7 +356,7 @@ select {
 /* Download Card */
 .download-card {
     background: white;
-    border: 1px solid #e2e8f0;
+    border: 2px solid #e2e8f0;
     border-radius: 12px;
     padding: 24px;
     display: flex;
@@ -365,11 +365,12 @@ select {
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 }
 
 .download-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     border-color: var(--primary);
 }
 
@@ -377,13 +378,14 @@ select {
     width: 50px;
     height: 50px;
     border-radius: 12px;
-    background: rgba(37, 99, 235, 0.1);
+    background: rgba(37, 99, 235, 0.08);
     color: var(--primary);
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 24px;
     flex-shrink: 0;
+    border: 1px solid rgba(37, 99, 235, 0.15);
 }
 
 /* Hero Specifics for F-Pattern */
@@ -656,10 +658,11 @@ select {
         /* Revised Mobile Dropdown Styling */
         padding-left: 0 !important;
         border-left: none !important;
-        background-color: #f1f5f9;
+        background-color: #f8f9fa;
         /* Slight contrast */
         margin-top: 5px;
         border-radius: 12px;
+        border: 1px solid #e2e8f0;
         display: none !important;
         /* Forces hidden unless mobile-visible is present */
     }

@@ -112,8 +112,8 @@
         align-items: center;
         justify-content: center;
         margin: 0 auto 24px;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-        border: 4px solid #F0F9FF;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        border: 4px solid #E0F2FE;
         position: relative;
         transition: all 0.3s ease;
     }
@@ -339,13 +339,13 @@
         <div class="grid-responsive"
             style="gap: 40px; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); justify-content: center;">
             {% for feature in features %}
-            <div class="fade-in-section is-visible"
-                style="padding: 30px; border-radius: 20px; background: #F8FAFC; border: 1px solid #E2E8F0; transition: 0.3s; height: 100%;">
+            <div class="feature-card fade-in-section is-visible"
+                style="padding: 30px; display: block; text-decoration: none; color: inherit;">
                 <div
-                    style="width: 60px; height: 60px; background: white; border-radius: 15px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
-                    <i class="fa-solid {{ feature.icon_class }}" style="font-size: 24px; color: var(--primary);"></i>
+                    style="width: 60px; height: 60px; border-radius: 16px; background: rgba(37, 99, 235, 0.1); display: flex; align-items: center; justify-content: center; margin-bottom: 24px; color: var(--primary); font-size: 24px;">
+                    <i class="fa-solid {{ feature.icon_class }}"></i>
                 </div>
-                <h3 style="font-size: 20px; font-weight: 700; margin-bottom: 10px; color: var(--dark);">
+                <h3 style="font-size: 20px; font-weight: 700; margin-bottom: 12px; color: var(--dark);">
                     {{feature.title}}</h3>
                 <p style="color: var(--gray); font-size: 14px; line-height: 1.6;">{{ feature.text }}</p>
             </div>
@@ -418,7 +418,7 @@
 </section>
 
 <!-- Student Journey Section -->
-<section class="content-section" style="background: #F8FAFC; overflow: hidden; padding-bottom: 80px;">
+<section class="content-section" style="background: white; overflow: hidden; padding-bottom: 80px;">
     <div class="container">
         <div style="text-align: center; margin-bottom: 60px;">
             <h2 class="section-title">Your Journey to Success</h2>
@@ -483,7 +483,7 @@
 </section>
 
 <!-- Services Section -->
-<section class="content-section" style="background-color: #F8FAFC;">
+<section class="content-section" style="background-color: white;">
     <div class="container">
         <h2 class="section-title">Our Services</h2>
         <p class="section-subtitle">Comprehensive guidance at every step of your study abroad journey.</p>
@@ -520,7 +520,7 @@
         <div class="grid-responsive">
             {% for testimonial in testimonials|slice:":3" %}
             <div
-                style="padding: 40px 30px; background: white; border-radius: 20px; border: 1px solid rgba(0,0,0,0.03); height: 100%; display: flex; flex-direction: column; align-items: center;">
+                style="padding: 40px 30px; background: white; border-radius: 20px; border: 2px solid #e2e8f0; box-shadow: 0 4px 12px rgba(0,0,0,0.06); height: 100%; display: flex; flex-direction: column; align-items: center;">
                 {% if testimonial.image %}
                 <div style="margin-top: 10px; margin-bottom: 25px; width: 100%; max-width: 320px;">
                     <img src="{{ testimonial.image.url }}" alt="{{ testimonial.name }}"

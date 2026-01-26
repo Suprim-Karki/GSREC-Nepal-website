@@ -4,7 +4,7 @@
 {% block title %}Contact Us | GSREC{% endblock %}
 
 {% block content %}
-<section style="padding: 80px 0; background: #F1F5F9; min-height: 90vh; display: flex; align-items: center;">
+<section style="padding: 80px 0; background: white; min-height: 90vh; display: flex; align-items: center;">
     <div class="container">
         <div style="text-align: center; margin-bottom: 60px;">
             <h2
@@ -18,7 +18,7 @@
             <div class="contact-info-panel"
                 style="background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%); padding: 60px; color: white; position: relative; display: flex; flex-direction: column; justify-content: center;">
                 <h3
-                    style="font-family: 'Poppins', sans-serif; fontWeight: 800; color: #FFFFFF; text-shadow: 0 2px 4px rgba(0,0,0,0.2); font-size: 28px; margin-bottom: 15px;">
+                    style="font-family: 'Poppins', sans-serif; font-weight: 800; color: #FFFFFF; text-shadow: 0 2px 4px rgba(0,0,0,0.2); font-size: 28px; margin-bottom: 15px;">
                     Let's talk about your future</h3>
                 <div style="display: flex; flex-direction: column; gap: 35px;">
                     <div style="display: flex; gap: 20px; align-items: flex-start;">
@@ -28,7 +28,7 @@
                         </div>
                         <div>
                             <h5
-                                style="font-family: 'Poppins', sans-serif; fontWeight: 800; color: #FFFFFF; text-shadow: 0 2px 4px rgba(0,0,0,0.2); font-size: 16px; margin-bottom: 5px;">
+                                style="font-family: 'Poppins', sans-serif; font-weight: 800; color: #FFFFFF; text-shadow: 0 2px 4px rgba(0,0,0,0.2); font-size: 16px; margin-bottom: 5px;">
                                 Office</h5>
                             <p style="opacity: 0.8; font-size: 14px; line-height: 1.6;">Putalisadak,
                                 Kathmandu,<br />Nepal</p>
@@ -41,7 +41,7 @@
                         </div>
                         <div>
                             <h5
-                                style="font-family: 'Poppins', sans-serif; fontWeight: 800; color: #FFFFFF; text-shadow: 0 2px 4px rgba(0,0,0,0.2); font-size: 16px; margin-bottom: 5px;">
+                                style="font-family: 'Poppins', sans-serif; font-weight: 800; color: #FFFFFF; text-shadow: 0 2px 4px rgba(0,0,0,0.2); font-size: 16px; margin-bottom: 5px;">
                                 Phone</h5>
                             <p style="opacity: 0.8; font-size: 14px;">+977 1-4244XXX</p>
                         </div>
@@ -53,7 +53,7 @@
                         </div>
                         <div>
                             <h5
-                                style="font-family: 'Poppins', sans-serif; fontWeight: 800; color: #FFFFFF; text-shadow: 0 2px 4px rgba(0,0,0,0.2); font-size: 16px; margin-bottom: 5px;">
+                                style="font-family: 'Poppins', sans-serif; font-weight: 800; color: #FFFFFF; text-shadow: 0 2px 4px rgba(0,0,0,0.2); font-size: 16px; margin-bottom: 5px;">
                                 Email</h5>
                             <p style="opacity: 0.8; font-size: 14px;">info@gsrecnepal.com.np</p>
                         </div>
@@ -116,6 +116,30 @@
                         Inquiry</button>
                 </form>
                 {% endif %}
+            </div>
+        </div>
+
+        <!-- Map Section -->
+        <div style="margin-top: 60px;">
+            <div style="text-align: center; margin-bottom: 30px;">
+                <h3 style="font-size: 28px; font-weight: 700; color: var(--dark); margin-bottom: 10px;">Find Us Here
+                </h3>
+                <p style="color: var(--gray); font-size: 16px;">Visit our office in Putalisadak, Kathmandu</p>
+            </div>
+            <div
+                style="border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border: 2px solid #e2e8f0;">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d267.59968535258844!2d85.33460729358669!3d27.69097844872121!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb19962c4fdda5%3A0x65fa64aee5d96afa!2sGlobal%20Social%20Research%20and%20Educational%20Consultancy%20P.%20Ltd.!5e0!3m2!1sen!2snp!4v1768297945353!5m2!1sen!2snp"
+                    width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+            <div style="text-align: center; margin-top: 20px;">
+                <a href="https://maps.app.goo.gl/JQTJ6DAPSxmNNJUA8" target="_blank" rel="noopener noreferrer"
+                    class="btn-primary"
+                    style="padding: 12px 24px; display: inline-flex; align-items: center; gap: 8px;">
+                    <i class="fa-solid fa-location-dot"></i> Open in Google Maps
+                </a>
             </div>
         </div>
     </div>

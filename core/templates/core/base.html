@@ -198,11 +198,15 @@
 
             <div
                 style="text-align: center; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.05); color: #475569; font-size: 13px;">
-                &copy; 2025 GSREC Nepal. All rights reserved.
+                &copy; 2008-<span id="currentYear"></span> GSREC Nepal. All rights reserved.
             </div>
         </div>
     </footer>
 
+    <script>
+        // Update copyright year automatically
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+    </script>
     <script src="{% static 'core/js/main.js' %}"></script>
 </body>
 
