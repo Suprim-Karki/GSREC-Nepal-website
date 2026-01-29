@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from rest_framework import generics
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from .models import HeroSection, Country, Service, TestPrep, Testimonial, Download, Partner, Milestone, Feature, Stat
+from .models import HeroSection, Country, Service, TestPrep, Testimonial, Download, Partner, Milestone, Feature, Stat, AboutUs
 from .serializers import (
     CountrySerializer, ServiceSerializer, TestPrepSerializer, FeatureSerializer, StatSerializer,
     HeroSectionSerializer, TestimonialSerializer, DownloadSerializer, PartnerSerializer, MilestoneSerializer
@@ -33,9 +33,11 @@ def index(request):
 def about(request):
     milestones = Milestone.objects.all().order_by('year')
     partners = Partner.objects.all()
+    about_us = AboutUs.objects.first()
     context = {
         'milestones': milestones,
-        'partners': partners
+        'partners': partners,
+        'about': about_us
     }
     return render(request, 'core/about.html', context)
 

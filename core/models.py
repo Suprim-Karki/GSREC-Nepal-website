@@ -156,3 +156,31 @@ class SiteSettings(models.Model):
 
     class Meta:
         verbose_name_plural = "Site Settings"
+
+class AboutUs(models.Model):
+    # Main Section
+    title = models.CharField(max_length=100, default="About GSREC Nepal")
+    subtitle = models.CharField(max_length=200, default="Global Student Recruitment & Education Consultancy (GSREC)")
+    main_image = models.ImageField(upload_to='about/', blank=True, null=True, help_text="Main image for About Us page")
+
+    # Mission Section
+    mission_title = models.CharField(max_length=100, default="Our Mission")
+    mission_description = models.TextField(default="At GSREC Nepal, based in Putalisadak, Kathmandu, we are committed to providing genuine and professional guidance to students aspiring to study abroad.")
+
+    # Stats
+    stat1_number = models.CharField(max_length=20, default="5000+", help_text="e.g. 5000+")
+    stat1_label = models.CharField(max_length=50, default="Students Placed")
+    
+    stat2_number = models.CharField(max_length=20, default="98%", help_text="e.g. 98%")
+    stat2_label = models.CharField(max_length=50, default="Visa Success Rate")
+
+    def save(self, *args, **kwargs):
+        if not self.pk and AboutUs.objects.exists():
+            pass # Singleton logic
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return "About Us Page Content"
+
+    class Meta:
+        verbose_name_plural = "About Us Page"

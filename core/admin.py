@@ -1,11 +1,20 @@
 from django.contrib import admin
-from .models import HeroSection, Country, Service, TestPrep, Testimonial, Download, Partner, Milestone, Feature, Stat, SiteSettings
+from .models import HeroSection, Country, Service, TestPrep, Testimonial, Download, Partner, Milestone, Feature, Stat, SiteSettings, AboutUs
 
 @admin.register(SiteSettings)
 class SiteSettingsAdmin(admin.ModelAdmin):
     list_display = ('site_name',)
 
     def has_add_permission(self, request):
+        if self.model.objects.exists():
+            return False
+        return super().has_add_permission(request)
+
+@admin.register(AboutUs)
+class AboutUsAdmin(admin.ModelAdmin):
+    list_display = ('title', 'mission_title')
+    def has_add_permission(self, request):
+        # Allow only one instance
         if self.model.objects.exists():
             return False
         return super().has_add_permission(request)

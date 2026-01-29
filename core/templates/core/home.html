@@ -575,7 +575,7 @@
                     {% endif %}
                     {% if partner.logo %}
                     <img src="{{ partner.logo.url }}" alt="{{ partner.name }}"
-                        style="width: 100%; max-height: 80px; object-fit: contain; filter: grayscale(100%); opacity: 0.6; transition: all 0.4s ease;">
+                        style="width: 100%; max-height: 80px; object-fit: contain; transition: all 0.4s ease;">
                     {% else %}
                     <div
                         style="padding: 20px; background: white; border-radius: 10px; font-weight: 700; color: var(--gray); border: 1px solid #e2e8f0;">
@@ -590,8 +590,6 @@
     </div>
     <style>
         .partner-logo img:hover {
-            filter: grayscale(0%);
-            opacity: 1;
             transform: scale(1.1);
         }
     </style>
