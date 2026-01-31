@@ -9,7 +9,8 @@ urlpatterns = [
     # New Pages
     path('about/', views.about, name='about'),
     path('contact/', views.contact, name='contact'),
-    path('downloads/', views.downloads, name='downloads'),
+    path('resources/', views.resources, name='resources'),
+    path('page/<slug:slug>/', views.legal_page_detail, name='legal_page_detail'),
     path('success-stories/', views.success_stories, name='success_stories'),
     
     # List Views (for "View All")

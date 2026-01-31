@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Country, Service, TestPrep, Feature, Stat, HeroSection, Testimonial, Download, Partner, Milestone
+from .models import Country, Service, TestPrep, Feature, Stat, HeroSection, Testimonial, Resource, Partner, Milestone
 
 class CountrySerializer(serializers.ModelSerializer):
     class Meta:
@@ -36,9 +36,22 @@ class TestimonialSerializer(serializers.ModelSerializer):
         model = Testimonial
         fields = '__all__'
 
+from .models import Country, Service, TestPrep, Feature, Stat, HeroSection, Testimonial, Resource, Partner, Milestone
+
+# ... existing serializers ...
+
 class DownloadSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Download
+        model = Resource
+        fields = '__all__'
+
+# Keep the name DownloadSerializer if API compatibility is needed, 
+# or rename to ResourceSerializer if breaking change is okay. 
+# Given constraints, I will rename it to ResourceSerializer to match the model.
+
+class ResourceSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Resource
         fields = '__all__'
 
 class PartnerSerializer(serializers.ModelSerializer):

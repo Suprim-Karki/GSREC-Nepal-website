@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import HeroSection, Country, Service, TestPrep, Testimonial, Download, Partner, Milestone, Feature, Stat, SiteSettings, AboutUs
+from .models import HeroSection, Country, Service, TestPrep, Testimonial, Resource, Partner, Milestone, Feature, Stat, SiteSettings, AboutUs, LegalPage
 
 @admin.register(SiteSettings)
 class SiteSettingsAdmin(admin.ModelAdmin):
@@ -42,9 +42,14 @@ class TestPrepAdmin(admin.ModelAdmin):
 class TestimonialAdmin(admin.ModelAdmin):
     list_display = ('name', 'university')
 
-@admin.register(Download)
-class DownloadAdmin(admin.ModelAdmin):
+@admin.register(Resource)
+class ResourceAdmin(admin.ModelAdmin):
     list_display = ('title', 'file_type', 'size_label')
+
+@admin.register(LegalPage)
+class LegalPageAdmin(admin.ModelAdmin):
+    list_display = ('title', 'slug')
+    prepopulated_fields = {'slug': ('title',)}
 
 @admin.register(Partner)
 class PartnerAdmin(admin.ModelAdmin):

@@ -2,10 +2,10 @@ from django.shortcuts import render, get_object_or_404
 from rest_framework import generics
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from .models import HeroSection, Country, Service, TestPrep, Testimonial, Download, Partner, Milestone, Feature, Stat, AboutUs
+from .models import HeroSection, Country, Service, TestPrep, Testimonial, Resource, Partner, Milestone, Feature, Stat, AboutUs, LegalPage
 from .serializers import (
     CountrySerializer, ServiceSerializer, TestPrepSerializer, FeatureSerializer, StatSerializer,
-    HeroSectionSerializer, TestimonialSerializer, DownloadSerializer, PartnerSerializer, MilestoneSerializer
+    HeroSectionSerializer, TestimonialSerializer, ResourceSerializer, PartnerSerializer, MilestoneSerializer
 )
 
 def index(request):
@@ -47,9 +47,13 @@ def contact(request):
         return render(request, 'core/contact.html', {'submitted': True})
     return render(request, 'core/contact.html')
 
-def downloads(request):
-    downloads_list = Download.objects.all()
-    return render(request, 'core/downloads.html', {'downloads': downloads_list})
+def resources(request):
+    resources_list = Resource.objects.all()
+    return render(request, 'core/resources.html', {'resources': resources_list})
+
+def legal_page_detail(request, slug):
+    page = get_object_or_404(LegalPage, slug=slug)
+    return render(request, 'core/legal_page.html', {'page': page})
 
 def success_stories(request):
     testimonials = Testimonial.objects.all()

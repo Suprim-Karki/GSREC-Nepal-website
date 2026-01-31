@@ -105,9 +105,9 @@
                     </div>
 
                     <div class="nav-item-wrapper">
-                        <a href="{% url 'downloads' %}"
-                            class="nav-item {% if request.resolver_match.url_name == 'downloads' %}active{% endif %}">
-                            Downloads
+                        <a href="{% url 'resources' %}"
+                            class="nav-item {% if request.resolver_match.url_name == 'resources' %}active{% endif %}">
+                            Resources
                         </a>
                     </div>
 
@@ -139,10 +139,10 @@
                     <div class="site-logo footer-logo" style="color: white; margin-bottom: 20px;">
                         {% if site_settings.footer_logo %}
                         <img src="{{ site_settings.footer_logo.url }}" alt="{{ site_settings.site_name }}"
-                            style="height: 40px; filter: brightness(0) invert(1);">
+                            style="height: 40px;">
                         {% elif site_settings.logo %}
                         <img src="{{ site_settings.logo.url }}" alt="{{ site_settings.site_name }}"
-                            style="height: 40px; filter: brightness(0) invert(1);">
+                            style="height: 40px;">
                         {% else %}
                         <div class="logo-icon">
                             <i class="fa-solid fa-graduation-cap" style="font-size: 14px;"></i>
@@ -151,16 +151,25 @@
                         {% endif %}
                     </div>
                     <p style="color: #94A3B8; font-size: 14px; line-height: 1.8;">
-                        Global Student Research & Educational Consultancy (GSREC Nepal) is a leading educational
-                        consultancy in Nepal, dedicated to providing ethical and reliable counseling services to
-                        students.
+                        {{ site_settings.footer_description }}
                     </p>
                     <div style="display: flex; gap: 15px; margin-top: 30px;">
-                        <!-- Social Icons (static for now) -->
-                        <div class="social-icon"><i class="fa-brands fa-facebook-f"></i></div>
-                        <div class="social-icon"><i class="fa-brands fa-twitter"></i></div>
-                        <div class="social-icon"><i class="fa-brands fa-instagram"></i></div>
-                        <div class="social-icon"><i class="fa-brands fa-linkedin-in"></i></div>
+                        {% if site_settings.facebook_link %}
+                        <a href="{{ site_settings.facebook_link }}" target="_blank" class="social-icon"><i
+                                class="fa-brands fa-facebook-f"></i></a>
+                        {% endif %}
+                        {% if site_settings.twitter_link %}
+                        <a href="{{ site_settings.twitter_link }}" target="_blank" class="social-icon"><i
+                                class="fa-brands fa-twitter"></i></a>
+                        {% endif %}
+                        {% if site_settings.instagram_link %}
+                        <a href="{{ site_settings.instagram_link }}" target="_blank" class="social-icon"><i
+                                class="fa-brands fa-instagram"></i></a>
+                        {% endif %}
+                        {% if site_settings.linkedin_link %}
+                        <a href="{{ site_settings.linkedin_link }}" target="_blank" class="social-icon"><i
+                                class="fa-brands fa-linkedin-in"></i></a>
+                        {% endif %}
                     </div>
                 </div>
 
@@ -169,12 +178,14 @@
                     <a href="{% url 'about' %}" class="footer-link">About Us</a>
                     <a href="{% url 'service_list' %}" class="footer-link">Our Services</a>
                     <a href="{% url 'contact' %}" class="footer-link">Contact</a>
-                    <a href="#" class="footer-link">Privacy Policy</a>
+                    <a href="{% url 'legal_page_detail' 'privacy-policy' %}" class="footer-link">Privacy Policy</a>
+                    <a href="{% url 'legal_page_detail' 'terms-and-conditions' %}" class="footer-link">Terms &
+                        Conditions</a>
                 </div>
 
                 <div>
                     <h4 class="footer-heading">Destinations</h4>
-                    {% for country in global_countries|slice:":4" %}
+                    {% for country in global_countries|slice:":5" %}
                     <a href="{% url 'destination_detail' country.slug %}" class="footer-link">{{ country.name }}</a>
                     {% endfor %}
                 </div>
@@ -183,15 +194,15 @@
                     <h4 class="footer-heading">Contact</h4>
                     <p class="footer-contact-item">
                         <i class="fa-solid fa-location-dot"></i>
-                        New Baneshwor, Kathmandu, Nepal
+                        {{ site_settings.address }}
                     </p>
                     <p class="footer-contact-item">
                         <i class="fa-solid fa-phone"></i>
-                        +977 1-4244XXX
+                        {{ site_settings.phone }}
                     </p>
                     <p class="footer-contact-item">
                         <i class="fa-solid fa-envelope"></i>
-                        info@gsrecnepal.com.np
+                        {{ site_settings.email }}
                     </p>
                 </div>
             </div>

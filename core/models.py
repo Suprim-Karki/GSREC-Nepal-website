@@ -112,9 +112,9 @@ class Testimonial(models.Model):
     def __str__(self):
         return f"{self.name} - {self.university}"
 
-class Download(models.Model):
+class Resource(models.Model):
     title = models.CharField(max_length=100)
-    file = models.FileField(upload_to='downloads/')
+    file = models.FileField(upload_to='resources/')
     file_type = models.CharField(max_length=10, help_text="PDF, DOCX etc.")
     icon_class = models.CharField(max_length=50, default="fa-file-arrow-down")
     size_label = models.CharField(max_length=20, help_text="e.g. 4.5 MB")
@@ -143,6 +143,20 @@ class SiteSettings(models.Model):
     logo = models.ImageField(upload_to='site/', blank=True, null=True, help_text="Main logo for Header")
     footer_logo = models.ImageField(upload_to='site/', blank=True, null=True, help_text="Logo for Footer. Defaults to main logo if not set.")
     favicon = models.ImageField(upload_to='site/', blank=True, null=True)
+    
+    # Footer Content
+    footer_description = models.TextField(blank=True, default="Global Student Research & Educational Consultancy (GSREC Nepal) is a leading educational consultancy in Nepal, dedicated to providing ethical and reliable counseling services to students.")
+    
+    # Contact Info
+    address = models.CharField(max_length=200, default="New Baneshwor, Kathmandu, Nepal")
+    phone = models.CharField(max_length=50, default="+977 1-4244XXX")
+    email = models.EmailField(default="info@gsrecnepal.com")
+    
+    # Social Media
+    facebook_link = models.URLField(blank=True, null=True)
+    twitter_link = models.URLField(blank=True, null=True)
+    instagram_link = models.URLField(blank=True, null=True)
+    linkedin_link = models.URLField(blank=True, null=True)
 
     def save(self, *args, **kwargs):
         if not self.pk and SiteSettings.objects.exists():
@@ -184,3 +198,16 @@ class AboutUs(models.Model):
 
     class Meta:
         verbose_name_plural = "About Us Page"
+
+class LegalPage(models.Model):
+    title = models.CharField(max_length=100)
+    slug = models.SlugField(unique=True, blank=True)
+    content = models.TextField(help_text="Content for the page (HTML supported)")
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.title)
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return self.title
