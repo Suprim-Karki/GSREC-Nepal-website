@@ -158,6 +158,11 @@ class SiteSettings(models.Model):
     instagram_link = models.URLField(blank=True, null=True)
     linkedin_link = models.URLField(blank=True, null=True)
 
+    # Footer Headings
+    footer_company_title = models.CharField(max_length=50, default="Company")
+    footer_destinations_title = models.CharField(max_length=50, default="Destinations")
+    footer_contact_title = models.CharField(max_length=50, default="Contact")
+
     def save(self, *args, **kwargs):
         if not self.pk and SiteSettings.objects.exists():
             # If you want to ensure only one instance exists, you can handle it here, 
@@ -211,3 +216,105 @@ class LegalPage(models.Model):
 
     def __str__(self):
         return self.title
+
+class BranchOffice(models.Model):
+    name = models.CharField(max_length=100)
+    address = models.CharField(max_length=200)
+    phone = models.CharField(max_length=50)
+    email = models.EmailField(blank=True, null=True)
+    order = models.IntegerField(default=0)
+
+    class Meta:
+        ordering = ['order', 'name']
+        verbose_name_plural = "Branch Offices"
+
+    def __str__(self):
+        return self.name
+
+class ContactPage(models.Model):
+    title = models.CharField(max_length=100, default="Get In Touch")
+    subtitle = models.CharField(max_length=200, default="Visit our office in Kathmandu or send us a message.")
+    info_panel_title = models.CharField(max_length=100, default="Let's talk about your future")
+    map_iframe_url = models.TextField(help_text="Google Maps Embed URL (src attribute)", default="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d267.59968535258844!2d85.33460729358669!3d27.69097844872121!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb19962c4fdda5%3A0x65fa64aee5d96afa!2sGlobal%20Social%20Research%20and%20Educational%20Consultancy%20P.%20Ltd.!5e0!3m2!1sen!2snp!4v1768297945353!5m2!1sen!2snp")
+    map_link = models.URLField(help_text="Direct link to Google Maps", default="https://maps.app.goo.gl/JQTJ6DAPSxmNNJUA8")
+
+    class Meta:
+        verbose_name_plural = "Contact Page"
+
+    def __str__(self):
+        return "Contact Page Settings"
+
+class HomePageSettings(models.Model):
+    # Why Choose Us Section
+    features_title = models.CharField(max_length=100, default="Why Choose GSREC Nepal?")
+    features_subtitle = models.CharField(max_length=200, default="We are not just consultants; we are your career architects. Trusted by students across Nepal.")
+
+    # Destinations Section
+    destinations_title = models.CharField(max_length=100, default="Popular Destinations")
+    destinations_subtitle = models.CharField(max_length=200, default="Choose from the world's top study destinations. We guide you to the perfect country for your career goals.")
+
+    # Journey Section
+    journey_title = models.CharField(max_length=100, default="Your Journey to Success")
+    journey_subtitle = models.CharField(max_length=200, default="We guide you through every step of your study abroad dream.")
+    
+    # Services Section
+    services_title = models.CharField(max_length=100, default="Our Services")
+    services_subtitle = models.CharField(max_length=200, default="Comprehensive guidance at every step of your study abroad journey.")
+
+    # Testimonials Section
+    testimonials_title = models.CharField(max_length=100, default="Student Stories")
+    testimonials_subtitle = models.CharField(max_length=200, default="Hear from students who made their dreams come true with GSREC.")
+
+    # Partners Section
+    partners_title = models.CharField(max_length=100, default="Our Trusted Partners")
+    partners_subtitle = models.CharField(max_length=200, default="Collaborating with world-class universities and institutions globally.")
+
+    # CTA Section
+    cta_title = models.CharField(max_length=100, default="Ready to start your journey?")
+    cta_subtitle = models.CharField(max_length=200, default="Book a free counseling session today.")
+    cta_button_text = models.CharField(max_length=50, default="Contact Us Now")
+
+    class Meta:
+        verbose_name_plural = "Home Page Settings"
+
+    def __str__(self):
+        return "Home Page Settings"
+
+class JourneyStep(models.Model):
+    title = models.CharField(max_length=100)
+    description = models.TextField()
+    icon_class = models.CharField(max_length=50, help_text="FontAwesome class e.g. fa-comments")
+    order = models.IntegerField(default=0)
+
+    class Meta:
+        ordering = ['order']
+
+    def __str__(self):
+        return f"Step {self.order}: {self.title}"
+
+class ListingPageSettings(models.Model):
+    # Destinations Listing
+    destinations_title = models.CharField(max_length=100, default="All Study Destinations")
+    destinations_subtitle = models.TextField(default="Explore the best countries for international education. We provide end-to-end support.")
+    
+    # Services Listing
+    services_title = models.CharField(max_length=100, default="Our Expert Services")
+    services_subtitle = models.TextField(default="", blank=True)
+    
+    # Test Prep Listing
+    test_prep_title = models.CharField(max_length=100, default="Standardized Test Preparation")
+    test_prep_subtitle = models.TextField(default="", blank=True)
+    
+    # Resources Listing
+    resources_title = models.CharField(max_length=100, default="Resources Center")
+    resources_subtitle = models.TextField(default="", blank=True)
+
+    # Success Stories
+    success_stories_title = models.CharField(max_length=100, default="Success Stories")
+    success_stories_subtitle = models.TextField(default="Hear from our students who are now studying at their dream universities across the globe.")
+
+    class Meta:
+        verbose_name_plural = "Listing Page Settings"
+
+    def __str__(self):
+        return "Listing Page Settings"

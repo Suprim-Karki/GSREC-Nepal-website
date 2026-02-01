@@ -1,13 +1,9 @@
 :root {
     --primary: #2563EB;
-    /* Electric Blue */
     --primary-dark: #1E40AF;
     --secondary: #F97316;
-    /* Vibrant Orange */
     --dark: #0F172A;
-    /* Slate 900 */
     --light: #ffffff;
-    /* Pure White */
     --white: #ffffff;
     --gray: #64748B;
 }
@@ -260,15 +256,15 @@ select {
 
 @keyframes pulse-soft {
     0% {
-        box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.4);
+        box-shadow: 0 0 0 0 color-mix(in srgb, var(--primary) 40%, transparent);
     }
 
     70% {
-        box-shadow: 0 0 0 15px rgba(37, 99, 235, 0);
+        box-shadow: 0 0 0 15px color-mix(in srgb, var(--primary) 0%, transparent);
     }
 
     100% {
-        box-shadow: 0 0 0 0 rgba(37, 99, 235, 0);
+        box-shadow: 0 0 0 0 color-mix(in srgb, var(--primary) 0%, transparent);
     }
 }
 
@@ -378,14 +374,14 @@ select {
     width: 50px;
     height: 50px;
     border-radius: 12px;
-    background: rgba(37, 99, 235, 0.08);
+    background: color-mix(in srgb, var(--primary) 8%, transparent);
     color: var(--primary);
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 24px;
     flex-shrink: 0;
-    border: 1px solid rgba(37, 99, 235, 0.15);
+    border: 1px solid color-mix(in srgb, var(--primary) 15%, transparent);
 }
 
 /* Hero Specifics for F-Pattern */

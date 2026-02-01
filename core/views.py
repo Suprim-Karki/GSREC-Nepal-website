@@ -1,8 +1,8 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from rest_framework import generics
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from .models import HeroSection, Country, Service, TestPrep, Testimonial, Resource, Partner, Milestone, Feature, Stat, AboutUs, LegalPage
+from .models import HeroSection, Country, Service, TestPrep, Testimonial, Resource, Partner, Milestone, Feature, Stat, AboutUs, LegalPage, ContactPage, HomePageSettings, JourneyStep, ListingPageSettings, BranchOffice
 from .serializers import (
     CountrySerializer, ServiceSerializer, TestPrepSerializer, FeatureSerializer, StatSerializer,
     HeroSectionSerializer, TestimonialSerializer, ResourceSerializer, PartnerSerializer, MilestoneSerializer
@@ -18,6 +18,9 @@ def index(request):
     features = Feature.objects.all()
     stats = Stat.objects.all()
     
+    home_settings = HomePageSettings.objects.first()
+    journey_steps = JourneyStep.objects.all()
+    
     context = {
         'hero': hero,
         'countries': countries,
@@ -27,6 +30,8 @@ def index(request):
         'partners': partners,
         'features': features,
         'stats': stats,
+        'home_settings': home_settings,
+        'journey_steps': journey_steps,
     }
     return render(request, 'core/home.html', context)
 
@@ -34,22 +39,26 @@ def about(request):
     milestones = Milestone.objects.all().order_by('year')
     partners = Partner.objects.all()
     about_us = AboutUs.objects.first()
+    branch_offices = BranchOffice.objects.all()
     context = {
         'milestones': milestones,
         'partners': partners,
-        'about': about_us
+        'about': about_us,
+        'branch_offices': branch_offices,
     }
     return render(request, 'core/about.html', context)
 
 def contact(request):
+    contact_page = ContactPage.objects.first()
     if request.method == 'POST':
         # Handle form submission logic here (e.g. send email or save to DB)
-        return render(request, 'core/contact.html', {'submitted': True})
-    return render(request, 'core/contact.html')
+        return render(request, 'core/contact.html', {'submitted': True, 'contact_page': contact_page})
+    return render(request, 'core/contact.html', {'contact_page': contact_page})
 
 def resources(request):
     resources_list = Resource.objects.all()
-    return render(request, 'core/resources.html', {'resources': resources_list})
+    listing_settings = ListingPageSettings.objects.first()
+    return render(request, 'core/resources.html', {'resources': resources_list, 'listing_settings': listing_settings})
 
 def legal_page_detail(request, slug):
     page = get_object_or_404(LegalPage, slug=slug)
@@ -57,12 +66,14 @@ def legal_page_detail(request, slug):
 
 def success_stories(request):
     testimonials = Testimonial.objects.all()
-    return render(request, 'core/success_stories.html', {'testimonials': testimonials})
+    listing_settings = ListingPageSettings.objects.first()
+    return render(request, 'core/success_stories.html', {'testimonials': testimonials, 'listing_settings': listing_settings})
 
 # Destinations
 def destination_list(request):
     countries = Country.objects.all()
-    return render(request, 'core/destination_list.html', {'countries': countries})
+    listing_settings = ListingPageSettings.objects.first()
+    return render(request, 'core/destination_list.html', {'countries': countries, 'listing_settings': listing_settings})
 
 def destination_detail(request, slug):
     country = get_object_or_404(Country, slug=slug)
@@ -80,7 +91,8 @@ def destination_detail(request, slug):
 # Services
 def service_list(request):
     services = Service.objects.all()
-    return render(request, 'core/service_list.html', {'services': services})
+    listing_settings = ListingPageSettings.objects.first()
+    return render(request, 'core/service_list.html', {'services': services, 'listing_settings': listing_settings})
 
 def service_detail(request, slug):
     service = get_object_or_404(Service, slug=slug)
@@ -98,7 +110,8 @@ def service_detail(request, slug):
 # Test Prep
 def test_prep_list(request):
     test_preps = TestPrep.objects.all()
-    return render(request, 'core/test_prep_list.html', {'test_preps': test_preps})
+    listing_settings = ListingPageSettings.objects.first()
+    return render(request, 'core/test_prep_list.html', {'test_preps': test_preps, 'listing_settings': listing_settings})
 
 def test_prep_detail(request, slug):
     test_prep = get_object_or_404(TestPrep, slug=slug)

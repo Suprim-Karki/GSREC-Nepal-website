@@ -9,8 +9,8 @@
         <div style="text-align: center; margin-bottom: 60px;">
             <h2
                 style="font-size: 36px; font-weight: 800; color: var(--dark); margin-bottom: 15px; letter-spacing: -1px;">
-                Get In Touch</h2>
-            <p style="color: var(--gray); font-size: 18px;">Visit our office in Kathmandu or send us a message.</p>
+                {{ contact_page.title}}</h2>
+            <p style="color: var(--gray); font-size: 18px;">{{ contact_page.subtitle}}</p>
         </div>
 
         <div class="contact-grid">
@@ -19,7 +19,7 @@
                 style="background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%); padding: 60px; color: white; position: relative; display: flex; flex-direction: column; justify-content: center;">
                 <h3
                     style="font-family: 'Poppins', sans-serif; font-weight: 800; color: #FFFFFF; text-shadow: 0 2px 4px rgba(0,0,0,0.2); font-size: 28px; margin-bottom: 15px;">
-                    Let's talk about your future</h3>
+                    {{ contact_page.info_panel_title}}</h3>
                 <div style="display: flex; flex-direction: column; gap: 35px;">
                     <div style="display: flex; gap: 20px; align-items: flex-start;">
                         <div
@@ -30,8 +30,8 @@
                             <h5
                                 style="font-family: 'Poppins', sans-serif; font-weight: 800; color: #FFFFFF; text-shadow: 0 2px 4px rgba(0,0,0,0.2); font-size: 16px; margin-bottom: 5px;">
                                 Office</h5>
-                            <p style="opacity: 0.8; font-size: 14px; line-height: 1.6;">Putalisadak,
-                                Kathmandu,<br />Nepal</p>
+                            <p style="opacity: 0.8; font-size: 14px; line-height: 1.6;">
+                                {{site_settings.address|linebreaksbr }}</p>
                         </div>
                     </div>
                     <div style="display: flex; gap: 20px; align-items: flex-start;">
@@ -43,7 +43,7 @@
                             <h5
                                 style="font-family: 'Poppins', sans-serif; font-weight: 800; color: #FFFFFF; text-shadow: 0 2px 4px rgba(0,0,0,0.2); font-size: 16px; margin-bottom: 5px;">
                                 Phone</h5>
-                            <p style="opacity: 0.8; font-size: 14px;">+977 1-4244XXX</p>
+                            <p style="opacity: 0.8; font-size: 14px;">{{ site_settings.phone }}</p>
                         </div>
                     </div>
                     <div style="display: flex; gap: 20px; align-items: flex-start;">
@@ -55,7 +55,7 @@
                             <h5
                                 style="font-family: 'Poppins', sans-serif; font-weight: 800; color: #FFFFFF; text-shadow: 0 2px 4px rgba(0,0,0,0.2); font-size: 16px; margin-bottom: 5px;">
                                 Email</h5>
-                            <p style="opacity: 0.8; font-size: 14px;">info@gsrecnepal.com.np</p>
+                            <p style="opacity: 0.8; font-size: 14px;">{{ site_settings.email }}</p>
                         </div>
                     </div>
                 </div>
@@ -93,12 +93,9 @@
                     <div style="margin-bottom: 20px;">
                         <select name="country" required class="form-input" style="color: #475569;">
                             <option value="" disabled selected>Interested Country *</option>
-                            <option value="usa">USA</option>
-                            <option value="uk">UK</option>
-                            <option value="australia">Australia</option>
-                            <option value="canada">Canada</option>
-                            <option value="europe">Europe</option>
-                            <option value="nz">New Zealand</option>
+                            {% for country in global_countries %}
+                            <option value="{{ country.slug }}">{{ country.name }}</option>
+                            {% endfor %}
                             <option value="other">Other</option>
                         </select>
                     </div>
@@ -129,14 +126,14 @@
             <div
                 style="border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border: 2px solid #e2e8f0;">
                 <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d267.59968535258844!2d85.33460729358669!3d27.69097844872121!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb19962c4fdda5%3A0x65fa64aee5d96afa!2sGlobal%20Social%20Research%20and%20Educational%20Consultancy%20P.%20Ltd.!5e0!3m2!1sen!2snp!4v1768297945353!5m2!1sen!2snp"
+                    src="{{ contact_page.map_iframe_url|default:'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d267.59968535258844!2d85.33460729358669!3d27.69097844872121!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb19962c4fdda5%3A0x65fa64aee5d96afa!2sGlobal%20Social%20Research%20and%20Educational%20Consultancy%20P.%20Ltd.!5e0!3m2!1sen!2snp!4v1768297945353!5m2!1sen!2snp' }}"
                     width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
                     referrerpolicy="no-referrer-when-downgrade">
                 </iframe>
             </div>
             <div style="text-align: center; margin-top: 20px;">
-                <a href="https://maps.app.goo.gl/JQTJ6DAPSxmNNJUA8" target="_blank" rel="noopener noreferrer"
-                    class="btn-primary"
+                <a href="{{ contact_page.map_link|default:'https://maps.app.goo.gl/JQTJ6DAPSxmNNJUA8' }}"
+                    target="_blank" rel="noopener noreferrer" class="btn-primary"
                     style="padding: 12px 24px; display: inline-flex; align-items: center; gap: 8px;">
                     <i class="fa-solid fa-location-dot"></i> Open in Google Maps
                 </a>

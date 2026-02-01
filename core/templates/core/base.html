@@ -22,7 +22,7 @@
             <nav style="display: flex; justify-content: space-between; align-items: center; height: 64px;">
                 <a href="{% url 'index' %}" class="site-logo">
                     {% if site_settings.logo %}
-                    <img src="{{ site_settings.logo.url }}" alt="{{ site_settings.site_name }}" style="height: 50px;">
+                    <img src="{{ site_settings.logo.url }}" alt="{{ site_settings.site_name }}" style="height: 35px;">
                     {% else %}
                     <div class="logo-icon">
                         <i class="fa-solid fa-graduation-cap"></i>
@@ -174,7 +174,7 @@
                 </div>
 
                 <div>
-                    <h4 class="footer-heading">Company</h4>
+                    <h4 class="footer-heading">{{ site_settings.footer_company_title|default:"Company" }}</h4>
                     <a href="{% url 'about' %}" class="footer-link">About Us</a>
                     <a href="{% url 'service_list' %}" class="footer-link">Our Services</a>
                     <a href="{% url 'contact' %}" class="footer-link">Contact</a>
@@ -184,14 +184,14 @@
                 </div>
 
                 <div>
-                    <h4 class="footer-heading">Destinations</h4>
+                    <h4 class="footer-heading">{{ site_settings.footer_destinations_title|default:"Destinations" }}</h4>
                     {% for country in global_countries|slice:":5" %}
                     <a href="{% url 'destination_detail' country.slug %}" class="footer-link">{{ country.name }}</a>
                     {% endfor %}
                 </div>
 
                 <div>
-                    <h4 class="footer-heading">Contact</h4>
+                    <h4 class="footer-heading">{{ site_settings.footer_contact_title|default:"Contact" }}</h4>
                     <p class="footer-contact-item">
                         <i class="fa-solid fa-location-dot"></i>
                         {{ site_settings.address }}

@@ -7,7 +7,11 @@
 <section style="padding: 120px 0 80px; background: white; text-align: center;">
     <div class="container">
         <h1 style="font-size: 42px; font-weight: 800; color: var(--dark); margin-bottom: 20px; letter-spacing: -1px;">
-            Standardized Test Preparation</h1>
+            {{ listing_settings.test_prep_title|default:"Standardized Test Preparation" }}</h1>
+        {% if listing_settings.test_prep_subtitle %}
+        <p style="font-size: 18px; color: var(--gray); max-width: 700px; margin: 0 auto;">{{
+            listing_settings.test_prep_subtitle }}</p>
+        {% endif %}
     </div>
 </section>
 <section class="content-section">

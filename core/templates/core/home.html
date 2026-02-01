@@ -113,7 +113,7 @@
         justify-content: center;
         margin: 0 auto 24px;
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        border: 4px solid #E0F2FE;
+        border: 4px solid color-mix(in srgb, var(--primary) 12%, white);
         position: relative;
         transition: all 0.3s ease;
     }
@@ -122,7 +122,7 @@
         background: var(--primary);
         color: white;
         border-color: rgba(255, 255, 255, 0.2);
-        box-shadow: 0 15px 40px rgba(37, 99, 235, 0.3);
+        box-shadow: 0 15px 40px color-mix(in srgb, var(--primary) 30%, transparent);
     }
 
     .journey-icon-box i {
@@ -243,7 +243,7 @@
                     <h1 class="hero-title"
                         style="font-weight: 800; margin-bottom: 24px; letter-spacing: -2px; text-shadow: 0 10px 30px rgba(0,0,0,0.15);">
                         <span style="color: var(--white);">{{ hero.title_part1 }}</span> <br />
-                        <span style="color: #E0F2FE;">{{ hero.title_part2 }}</span>
+                        <span style="color: color-mix(in srgb, var(--primary) 12%, white);">{{ hero.title_part2}}</span>
                     </h1>
                     <p class="hero-subtitle">
                         {{ hero.subtitle }}
@@ -330,10 +330,10 @@
     <div class="container">
         <div style="text-align: center; margin-bottom: 60px;">
             <div class="fade-in-section is-visible">
-                <h2 style="font-size: 36px; font-weight: 700; margin-bottom: 15px; color: var(--dark);">Why Choose GSREC
-                    Nepal?</h2>
-                <p style="color: var(--gray); font-size: 16px; max-width: 600px; margin: 0 auto;">We are not just
-                    consultants; we are your career architects. Trusted by students across Nepal.</p>
+                <h2 style="font-size: 36px; font-weight: 700; margin-bottom: 15px; color: var(--dark);">
+                    {{home_settings.features_title }}</h2>
+                <p style="color: var(--gray); font-size: 16px; max-width: 600px; margin: 0 auto;">
+                    {{home_settings.features_subtitle}}</p>
             </div>
         </div>
         <div class="grid-responsive"
@@ -342,7 +342,7 @@
             <div class="feature-card fade-in-section is-visible"
                 style="padding: 30px; display: block; text-decoration: none; color: inherit;">
                 <div
-                    style="width: 60px; height: 60px; border-radius: 16px; background: rgba(37, 99, 235, 0.1); display: flex; align-items: center; justify-content: center; margin-bottom: 24px; color: var(--primary); font-size: 24px;">
+                    style="width: 60px; height: 60px; border-radius: 16px; background: color-mix(in srgb, var(--primary) 10%, transparent); display: flex; align-items: center; justify-content: center; margin-bottom: 24px; color: var(--primary); font-size: 24px;">
                     <i class="fa-solid {{ feature.icon_class }}"></i>
                 </div>
                 <h3 style="font-size: 20px; font-weight: 700; margin-bottom: 12px; color: var(--dark);">
@@ -357,7 +357,7 @@
     <div style="position: relative; z-index: 10; margin-top: 60px; margin-bottom: 60px; padding: 0 24px;">
         <div class="container">
             <div
-                style="background: var(--primary); border-radius: 50px; padding: 30px 50px; color: white; box-shadow: 0 20px 50px -10px rgba(37, 99, 235, 0.5); display: flex; justify-content: space-around; flex-wrap: wrap; gap: 30px; text-align: center; max-width: 1100px; margin: 0 auto; border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(10px);">
+                style="background: var(--primary); border-radius: 50px; padding: 30px 50px; color: white; box-shadow: 0 20px 50px -10px color-mix(in srgb, var(--primary) 50%, transparent); display: flex; justify-content: space-around; flex-wrap: wrap; gap: 30px; text-align: center; max-width: 1100px; margin: 0 auto; border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(10px);">
                 {% for stat in stats %}
                 <div style="display: flex; flex-direction: column; align-items: center;">
                     <div style="font-size: 32px; font-weight: 800; margin-bottom: 4px; line-height: 1;">{{ stat.number}}
@@ -376,9 +376,8 @@
 <!-- Popular Destinations -->
 <section class="content-section">
     <div class="container">
-        <h2 class="section-title">Popular Destinations</h2>
-        <p class="section-subtitle">Choose from the world's top study destinations. We guide you to the perfect country
-            for your career goals.</p>
+        <h2 class="section-title">{{ home_settings.destinations_title}}</h2>
+        <p class="section-subtitle">{{ home_settings.destinations_subtitle }}</p>
 
         <div class="grid-responsive">
             {% for country in countries|slice:":3" %}
@@ -421,62 +420,22 @@
 <section class="content-section" style="background: white; overflow: hidden; padding-bottom: 80px;">
     <div class="container">
         <div style="text-align: center; margin-bottom: 60px;">
-            <h2 class="section-title">Your Journey to Success</h2>
-            <p class="section-subtitle">We guide you through every step of your study abroad dream.</p>
+            <h2 class="section-title">{{ home_settings.journey_title}}</h2>
+            <p class="section-subtitle">{{ home_settings.journey_subtitle}}</p>
         </div>
 
         <div class="journey-wrapper">
             <div class="journey-steps">
-                <!-- Step 1 -->
+                {% for step in journey_steps %}
                 <div class="journey-step-item fade-in-section is-visible">
                     <div class="journey-icon-box">
-                        <span class="step-badge">1</span>
-                        <i class="fa-solid fa-comments"></i>
+                        <span class="step-badge">{{ forloop.counter }}</span>
+                        <i class="fa-solid {{ step.icon_class }}"></i>
                     </div>
-                    <div class="journey-title">Counseling</div>
-                    <div class="journey-desc">Expert guidance to identify your goals and match you with the right
-                        course.</div>
+                    <div class="journey-title">{{ step.title }}</div>
+                    <div class="journey-desc">{{ step.description }}</div>
                 </div>
-
-                <!-- Step 2 -->
-                <div class="journey-step-item fade-in-section is-visible">
-                    <div class="journey-icon-box">
-                        <span class="step-badge">2</span>
-                        <i class="fa-solid fa-university"></i>
-                    </div>
-                    <div class="journey-title">University Selection</div>
-                    <div class="journey-desc">Choose from 500+ top universities that align with your aspirations.</div>
-                </div>
-
-                <!-- Step 3 -->
-                <div class="journey-step-item fade-in-section is-visible">
-                    <div class="journey-icon-box">
-                        <span class="step-badge">3</span>
-                        <i class="fa-solid fa-file-contract"></i>
-                    </div>
-                    <div class="journey-title">Documentation</div>
-                    <div class="journey-desc">Full assistance with applications, SOPs, and financial documents.</div>
-                </div>
-
-                <!-- Step 4 -->
-                <div class="journey-step-item fade-in-section is-visible">
-                    <div class="journey-icon-box">
-                        <span class="step-badge">4</span>
-                        <i class="fa-brands fa-cc-visa"></i>
-                    </div>
-                    <div class="journey-title">Visa Success</div>
-                    <div class="journey-desc">Rigorous interview prep and visa lodging for high success rates.</div>
-                </div>
-
-                <!-- Step 5 -->
-                <div class="journey-step-item fade-in-section is-visible">
-                    <div class="journey-icon-box">
-                        <span class="step-badge">5</span>
-                        <i class="fa-solid fa-plane-departure"></i>
-                    </div>
-                    <div class="journey-title">Fly Abroad</div>
-                    <div class="journey-desc">Pre-departure support to ensure you settle in smoothly.</div>
-                </div>
+                {% endfor %}
             </div>
         </div>
     </div>
@@ -485,15 +444,15 @@
 <!-- Services Section -->
 <section class="content-section" style="background-color: white;">
     <div class="container">
-        <h2 class="section-title">Our Services</h2>
-        <p class="section-subtitle">Comprehensive guidance at every step of your study abroad journey.</p>
+        <h2 class="section-title">{{ home_settings.services_title}}</h2>
+        <p class="section-subtitle">{{ home_settings.services_subtitle}}</p>
 
         <div class="grid-responsive">
             {% for service in services|slice:":3" %}
             <a href="{% url 'service_detail' service.slug %}" class="feature-card"
                 style="padding: 30px; display: block; text-decoration: none; color: inherit;">
                 <div
-                    style="width: 60px; height: 60px; border-radius: 16px; background: rgba(37, 99, 235, 0.1); display: flex; align-items: center; justify-content: center; margin-bottom: 24px; color: var(--primary); font-size: 24px;">
+                    style="width: 60px; height: 60px; border-radius: 16px; background: color-mix(in srgb, var(--primary) 10%, transparent); display: flex; align-items: center; justify-content: center; margin-bottom: 24px; color: var(--primary); font-size: 24px;">
                     <i class="fa-solid {{ service.icon_class }}"></i>
                 </div>
                 <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 12px; color: var(--dark);">
@@ -514,8 +473,8 @@
 <!-- Testimonials -->
 <section class="content-section">
     <div class="container">
-        <h2 class="section-title">Student Stories</h2>
-        <p class="section-subtitle">Hear from students who made their dreams come true with GSREC.</p>
+        <h2 class="section-title">{{ home_settings.testimonials_title}}</h2>
+        <p class="section-subtitle">{{ home_settings.testimonials_subtitle}}</p>
 
         <div class="grid-responsive">
             {% for testimonial in testimonials|slice:":3" %}
@@ -562,8 +521,8 @@
 <section class="content-section" style="background-color: white; padding: 80px 0;">
     <div class="container">
         <div style="text-align: center; margin-bottom: 50px;">
-            <h2 class="section-title">Our Trusted Partners</h2>
-            <p class="section-subtitle">Collaborating with world-class universities and institutions globally.</p>
+            <h2 class="section-title">{{ home_settings.partners_title}}</h2>
+            <p class="section-subtitle">{{ home_settings.partners_subtitle}}</p>
         </div>
 
         <div class="grid-responsive"
@@ -598,13 +557,13 @@
 
 <section class="content-section" style="background-color: var(--primary); color: white; text-align: center;">
     <div class="container">
-        <h2 style="font-size: 36px; font-weight: 800; margin-bottom: 24px; color: white;">Ready to start your journey?
+        <h2 style="font-size: 36px; font-weight: 800; margin-bottom: 24px; color: white;">{{home_settings.cta_title}}
         </h2>
         <p style="max-width: 600px; margin: 0 auto 40px; font-size: 18px; color: rgba(255,255,255,0.9);">
-            Book a free counseling session today.
+            {{ home_settings.cta_subtitle}}
         </p>
         <a href="{% url 'contact' %}" class="btn-primary" style="background: white; color: var(--primary);">
-            Contact Us Now
+            {{ home_settings.cta_button_text}}
         </a>
     </div>
 </section>

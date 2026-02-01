@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import HeroSection, Country, Service, TestPrep, Testimonial, Resource, Partner, Milestone, Feature, Stat, SiteSettings, AboutUs, LegalPage
+from .models import HeroSection, Country, Service, TestPrep, Testimonial, Resource, Partner, Milestone, Feature, Stat, SiteSettings, AboutUs, LegalPage, ContactPage, HomePageSettings, JourneyStep, ListingPageSettings, BranchOffice
 
 @admin.register(SiteSettings)
 class SiteSettingsAdmin(admin.ModelAdmin):
@@ -66,3 +66,32 @@ class FeatureAdmin(admin.ModelAdmin):
 @admin.register(Stat)
 class StatAdmin(admin.ModelAdmin):
     list_display = ('number', 'label', 'order')
+
+@admin.register(ContactPage)
+class ContactPageAdmin(admin.ModelAdmin):
+    def has_add_permission(self, request):
+        if self.model.objects.exists():
+            return False
+        return super().has_add_permission(request)
+
+@admin.register(HomePageSettings)
+class HomePageSettingsAdmin(admin.ModelAdmin):
+    def has_add_permission(self, request):
+        if self.model.objects.exists():
+            return False
+        return super().has_add_permission(request)
+
+@admin.register(JourneyStep)
+class JourneyStepAdmin(admin.ModelAdmin):
+    list_display = ('title', 'order')
+
+@admin.register(ListingPageSettings)
+class ListingPageSettingsAdmin(admin.ModelAdmin):
+    def has_add_permission(self, request):
+        if self.model.objects.exists():
+            return False
+        return super().has_add_permission(request)
+
+@admin.register(BranchOffice)
+class BranchOfficeAdmin(admin.ModelAdmin):
+    list_display = ('name', 'address', 'phone', 'order')
