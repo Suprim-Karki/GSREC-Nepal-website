@@ -192,18 +192,21 @@
 
                 <div>
                     <h4 class="footer-heading">{{ site_settings.footer_contact_title|default:"Contact" }}</h4>
-                    <p class="footer-contact-item">
-                        <i class="fa-solid fa-location-dot"></i>
+                    <a href="https://maps.google.com/?q={{ site_settings.address|urlencode }}" target="_blank"
+                        class="interactive-link footer-contact-item" style="display: flex; gap: 10px; color: inherit;">
+                        <i class="fa-solid fa-location-dot" style="margin-top: 4px;"></i>
                         {{ site_settings.address }}
-                    </p>
-                    <p class="footer-contact-item">
-                        <i class="fa-solid fa-phone"></i>
+                    </a>
+                    <a href="tel:{{ site_settings.phone }}" class="interactive-link footer-contact-item"
+                        style="display: flex; gap: 10px; color: inherit;">
+                        <i class="fa-solid fa-phone" style="margin-top: 4px;"></i>
                         {{ site_settings.phone }}
-                    </p>
-                    <p class="footer-contact-item">
-                        <i class="fa-solid fa-envelope"></i>
+                    </a>
+                    <a href="mailto:{{ site_settings.email }}" class="interactive-link footer-contact-item"
+                        style="display: flex; gap: 10px; color: inherit;">
+                        <i class="fa-solid fa-envelope" style="margin-top: 4px;"></i>
                         {{ site_settings.email }}
-                    </p>
+                    </a>
                 </div>
             </div>
 

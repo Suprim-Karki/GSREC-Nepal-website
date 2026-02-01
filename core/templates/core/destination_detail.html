@@ -8,8 +8,8 @@
     style="height: 50vh; position: relative; display: flex; align-items: center; justify-content: center; color: white; text-align: center; background: linear-gradient(135deg, var(--primary) 0%, var(--dark) 100%);">
     <div style="position: relative; z-index: 2; padding: 0 20px;">
         <div
-            style="width: 80px; height: 80px; background: rgba(255,255,255,0.1); border-radius: 24px; display: inline-flex; align-items: center; justify-content: center; font-size: 32px; color: white; margin-bottom: 20px;">
-            <i class="fa-solid fa-map-marker-alt"></i>
+            style="width: 80px; height: 80px; background: rgba(255,255,255,0.1); border-radius: 24px; display: inline-flex; align-items: center; justify-content: center; font-size: 48px; color: white; margin-bottom: 20px;">
+            {{ country.flag_emoji }}
         </div>
         <h1
             style="font-size: 56px; font-weight: 800; text-shadow: 0 10px 30px rgba(0,0,0,0.2); letter-spacing: -2px; color: #FFFFFF;">
@@ -37,12 +37,24 @@
                     {% endfor %}
                 </ul>
 
-                <h3 style="font-size: 24px; font-weight: 700; margin-bottom: 20px;">Top Universities</h3>
+                <h3 style="font-size: 24px; font-weight: 700; margin-bottom: 20px;">Institutions</h3>
                 <ul style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                    {% for inst in country.institutions.all %}
+                    <li
+                        style="padding: 10px; background: #f8fafc; border-radius: 8px; border-left: 3px solid var(--primary);">
+                        {% if inst.url %}
+                        <a href="{{ inst.url }}" target="_blank" class="institution-link">{{ inst.name }}</a>
+                        {% else %}
+                        <span class="institution-name">{{ inst.name }}</span>
+                        {% endif %}
+                    </li>
+                    {% empty %}
+                    <!-- Fallback to old JSON list if no new models entered yet, or just empty -->
                     {% for uni in country.universities %}
                     <li
                         style="padding: 10px; background: #f8fafc; border-radius: 8px; border-left: 3px solid var(--primary);">
                         {{ uni }}</li>
+                    {% endfor %}
                     {% endfor %}
                 </ul>
             </div>

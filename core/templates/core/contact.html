@@ -30,8 +30,10 @@
                             <h5
                                 style="font-family: 'Poppins', sans-serif; font-weight: 800; color: #FFFFFF; text-shadow: 0 2px 4px rgba(0,0,0,0.2); font-size: 16px; margin-bottom: 5px;">
                                 Office</h5>
-                            <p style="opacity: 0.8; font-size: 14px; line-height: 1.6;">
-                                {{site_settings.address|linebreaksbr }}</p>
+                            <a href="https://maps.google.com/?q={{ site_settings.address|urlencode }}" target="_blank"
+                                class="interactive-link" style="opacity: 0.8; font-size: 14px; line-height: 1.6;">
+                                {{site_settings.address|linebreaksbr }}
+                            </a>
                         </div>
                     </div>
                     <div style="display: flex; gap: 20px; align-items: flex-start;">
@@ -43,7 +45,8 @@
                             <h5
                                 style="font-family: 'Poppins', sans-serif; font-weight: 800; color: #FFFFFF; text-shadow: 0 2px 4px rgba(0,0,0,0.2); font-size: 16px; margin-bottom: 5px;">
                                 Phone</h5>
-                            <p style="opacity: 0.8; font-size: 14px;">{{ site_settings.phone }}</p>
+                            <a href="tel:{{ site_settings.phone }}" class="interactive-link"
+                                style="opacity: 0.8; font-size: 14px;">{{ site_settings.phone }}</a>
                         </div>
                     </div>
                     <div style="display: flex; gap: 20px; align-items: flex-start;">
@@ -55,7 +58,8 @@
                             <h5
                                 style="font-family: 'Poppins', sans-serif; font-weight: 800; color: #FFFFFF; text-shadow: 0 2px 4px rgba(0,0,0,0.2); font-size: 16px; margin-bottom: 5px;">
                                 Email</h5>
-                            <p style="opacity: 0.8; font-size: 14px;">{{ site_settings.email }}</p>
+                            <a href="mailto:{{ site_settings.email }}" class="interactive-link"
+                                style="opacity: 0.8; font-size: 14px;">{{ site_settings.email }}</a>
                         </div>
                     </div>
                 </div>

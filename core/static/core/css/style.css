@@ -897,8 +897,54 @@ select {
         border-radius: 20px;
     }
 
-    .contact-info-panel,
     .contact-form-panel {
         padding: 30px !important;
     }
+}
+
+/* Institution & Interactive Links */
+.institution-link,
+.interactive-link {
+    color: inherit;
+    /* Inherit color from parent (white in footer/panel) */
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+}
+
+.institution-link:hover,
+.interactive-link:hover {
+    color: var(--primary);
+    /* Maintain primary hover? Or white? */
+    /* For footer/dark backgrounds, maybe keep it white or light blue? */
+    /* Let's rely on context or specifically override if needed. */
+    transform: translateX(5px);
+    text-decoration: none;
+}
+
+/* Specific color override for dark backgrounds if needed */
+.contact-info-panel .interactive-link:hover,
+footer .interactive-link:hover {
+    color: #cbd5e1;
+    /* Light gray on hover for dark backgrounds */
+}
+
+.institution-link::after,
+.interactive-link::after {
+    content: '\f08e';
+    /* FontAwesome external link icon */
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    margin-left: 6px;
+    font-size: 12px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.institution-link:hover::after,
+.interactive-link:hover::after {
+    opacity: 1;
 }

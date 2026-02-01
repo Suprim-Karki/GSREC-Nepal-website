@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import HeroSection, Country, Service, TestPrep, Testimonial, Resource, Partner, Milestone, Feature, Stat, SiteSettings, AboutUs, LegalPage, ContactPage, HomePageSettings, JourneyStep, ListingPageSettings, BranchOffice
+from .models import HeroSection, Country, Institution, Service, TestPrep, Testimonial, Resource, Partner, Milestone, Feature, Stat, SiteSettings, AboutUs, LegalPage, ContactPage, HomePageSettings, JourneyStep, ListingPageSettings, BranchOffice
 
 @admin.register(SiteSettings)
 class SiteSettingsAdmin(admin.ModelAdmin):
@@ -23,9 +23,14 @@ class AboutUsAdmin(admin.ModelAdmin):
 class HeroSectionAdmin(admin.ModelAdmin):
     list_display = ('title_part1', 'title_part2', 'is_active')
 
+class InstitutionInline(admin.TabularInline):
+    model = Institution
+    extra = 1
+
 @admin.register(Country)
 class CountryAdmin(admin.ModelAdmin):
     list_display = ('name', 'order')
+    inlines = [InstitutionInline]
     prepopulated_fields = {'slug': ('name',)}
 
 @admin.register(Service)

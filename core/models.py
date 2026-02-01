@@ -60,6 +60,18 @@ class Country(models.Model):
         verbose_name_plural = "Countries"
         ordering = ['order', 'name']
 
+class Institution(models.Model):
+    country = models.ForeignKey(Country, on_delete=models.CASCADE, related_name='institutions')
+    name = models.CharField(max_length=200)
+    url = models.URLField(blank=True, null=True)
+    order = models.IntegerField(default=0)
+
+    class Meta:
+        ordering = ['order', 'name']
+
+    def __str__(self):
+        return self.name
+
 class Service(models.Model):
     slug = models.SlugField(unique=True, blank=True)
     title = models.CharField(max_length=100)
