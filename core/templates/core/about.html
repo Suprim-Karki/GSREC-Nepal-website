@@ -100,18 +100,22 @@
                 </div>
                 <h3 style="font-size: 22px; font-weight: 700; color: var(--dark); margin-bottom: 12px;">{{ branch.name}}
                 </h3>
-                <p style="color: var(--gray); font-size: 15px; margin-bottom: 15px; line-height: 1.6;">
+                <a href="https://maps.google.com/?q={{ branch.address|urlencode }}" target="_blank"
+                    class="interactive-link"
+                    style="color: var(--gray); font-size: 15px; margin-bottom: 15px; line-height: 1.6; display: block;">
                     <i class="fa-solid fa-map-pin" style="margin-right: 8px; color: var(--primary);"></i>
                     {{branch.address }}
-                </p>
-                <p style="color: var(--gray); font-size: 15px; margin-bottom: 0;">
+                </a>
+                <a href="tel:{{ branch.phone }}" class="interactive-link"
+                    style="color: var(--gray); font-size: 15px; margin-bottom: 0; display: block;">
                     <i class="fa-solid fa-phone" style="margin-right: 8px; color: var(--primary);"></i> {{branch.phone}}
-                </p>
+                </a>
                 {% if branch.email %}
-                <p style="color: var(--gray); font-size: 15px; margin-top: 8px;">
+                <a href="mailto:{{ branch.email }}" class="interactive-link"
+                    style="color: var(--gray); font-size: 15px; margin-top: 8px; display: block;">
                     <i class="fa-solid fa-envelope" style="margin-right: 8px; color: var(--primary);"></i>
                     {{branch.email }}
-                </p>
+                </a>
                 {% endif %}
             </div>
             {% endfor %}

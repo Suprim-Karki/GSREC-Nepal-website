@@ -59,21 +59,9 @@
                 </ul>
             </div>
 
-            <div
-                style="background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); height: fit-content;">
-                <h4 style="font-size: 20px; font-weight: 700; margin-bottom: 20px;">Quick Inquiry</h4>
-                <form>
-                    <div style="margin-bottom: 15px;">
-                        <input type="text" placeholder="Full Name" class="form-input">
-                    </div>
-                    <div style="margin-bottom: 15px;">
-                        <input type="email" placeholder="Email Address" class="form-input">
-                    </div>
-                    <div style="margin-bottom: 15px;">
-                        <input type="tel" placeholder="Phone Number" class="form-input">
-                    </div>
-                    <button type="submit" class="btn-primary" style="width: 100%;">Submit Inquiry</button>
-                </form>
+            <!-- Sidebar Form with Sticky Position -->
+            <div style="position: sticky; top: 120px; height: fit-content;">
+                {% include 'core/includes/inquiry_form.html' with form_title="Quick Inquiry" %}
             </div>
         </div>
     </div>

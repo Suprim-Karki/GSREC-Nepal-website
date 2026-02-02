@@ -1,0 +1,99 @@
+<div class="contact-form-panel"
+    style="padding: 30px; background: white; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05);">
+
+    {% if submitted %}
+    <!-- Success Message -->
+    <div style="text-align: center; padding: 40px 0;">
+        <div
+            style="width: 60px; height: 60px; background: #ECFDF5; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;">
+            <i class="fa-solid fa-check" style="font-size: 24px; color: #10B981;"></i>
+        </div>
+        <h3 style="font-size: 24px; font-weight: 700; margin-bottom: 10px; color: var(--dark);">
+            Message Sent!
+        </h3>
+        <p style="color: var(--gray);">We will get back to you shortly.</p>
+        <a href="{{ request.path }}" class="btn-primary" style="margin-top: 20px; display: inline-block;">
+            Send Another
+        </a>
+    </div>
+
+    {% else %}
+    <!-- Form -->
+    <form method="POST" action="">
+        {% csrf_token %}
+        <h3 style="font-size: 24px; font-weight: 700; margin-bottom: 20px; color: var(--primary);">
+            {{ form_title|default:"Quick Inquiry" }}
+        </h3>
+
+        <!-- Name -->
+        <div style="margin-bottom: 15px;">
+            <input type="text" name="name" required class="form-input" placeholder="Full Name *"
+                style="width: 100%; padding: 12px; border: 1px solid #e2e8f0; border-radius: 8px;">
+        </div>
+
+        <!-- Phone -->
+        <div style="margin-bottom: 15px;">
+            <input type="tel" name="phone" required class="form-input" placeholder="Phone Number *"
+                style="width: 100%; padding: 12px; border: 1px solid #e2e8f0; border-radius: 8px;">
+        </div>
+
+        <!-- Email -->
+        <div style="margin-bottom: 15px;">
+            <input type="email" name="email" class="form-input" placeholder="Email Address (Optional)"
+                style="width: 100%; padding: 12px; border: 1px solid #e2e8f0; border-radius: 8px;">
+        </div>
+
+        <!-- Country Select -->
+        <div style="margin-bottom: 15px;">
+            <select name="country" class="form-input"
+                style="width: 100%; padding: 12px; border: 1px solid #e2e8f0; border-radius: 8px; color: #475569;">
+                <option value="" disabled {% if not country %}selected{% endif %}>Interested Country</option>
+                {% for c in global_countries %}
+                {% if country %}
+                {% if country.slug == c.slug %}
+                <option value="{{ c.slug }}" selected>{{ c.name }}</option>
+                {% else %}
+                <option value="{{ c.slug }}">{{ c.name }}</option>
+                {% endif %}
+                {% else %}
+                <option value="{{ c.slug }}">{{ c.name }}</option>
+                {% endif %}
+                {% endfor %}
+                <option value="other">Other</option>
+            </select>
+        </div>
+
+        <!-- Test Prep Select -->
+        <div style="margin-bottom: 15px;">
+            <select name="test_prep" class="form-input"
+                style="width: 100%; padding: 12px; border: 1px solid #e2e8f0; border-radius: 8px; color: #475569;">
+                <option value="" disabled {% if not test_prep %}selected{% endif %}>Test Preparation</option>
+                {% for tp in global_test_preps %}
+                {% if test_prep %}
+                {% if test_prep.slug == tp.slug %}
+                <option value="{{ tp.slug }}" selected>{{ tp.name }}</option>
+                {% else %}
+                <option value="{{ tp.slug }}">{{ tp.name }}</option>
+                {% endif %}
+                {% else %}
+                <option value="{{ tp.slug }}">{{ tp.name }}</option>
+                {% endif %}
+                {% endfor %}
+            </select>
+        </div>
+
+        <!-- Message -->
+        <div style="margin-bottom: 20px;">
+            <textarea name="message" class="form-input"
+                style="width: 100%; padding: 12px; border: 1px solid #e2e8f0; border-radius: 8px; min-height: 100px; resize: none;"
+                placeholder="Tell us about your requirements... (Optional)"></textarea>
+        </div>
+
+        <!-- Submit -->
+        <button type="submit" class="btn-primary"
+            style="width: 100%; justify-content: center; font-size: 16px; padding: 14px;">
+            Submit Inquiry
+        </button>
+    </form>
+    {% endif %}
+</div>

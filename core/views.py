@@ -50,10 +50,19 @@ def about(request):
 
 def contact(request):
     contact_page = ContactPage.objects.first()
+    submitted = False
     if request.method == 'POST':
         # Handle form submission logic here (e.g. send email or save to DB)
-        return render(request, 'core/contact.html', {'submitted': True, 'contact_page': contact_page})
-    return render(request, 'core/contact.html', {'contact_page': contact_page})
+        submitted = True
+    
+    # Context for form
+    global_test_preps = TestPrep.objects.all()
+    
+    return render(request, 'core/contact.html', {
+        'submitted': submitted, 
+        'contact_page': contact_page,
+        'global_test_preps': global_test_preps
+    })
 
 def resources(request):
     resources_list = Resource.objects.all()
@@ -80,11 +89,18 @@ def destination_detail(request, slug):
     countries = Country.objects.all()
     test_preps = TestPrep.objects.all()
     services = Service.objects.all()
+    
+    submitted = False
+    if request.method == 'POST':
+        submitted = True
+        
     context = {
         'country': country, 
         'countries': countries, 
         'services': services, 
-        'test_preps': test_preps
+        'test_preps': test_preps,
+        'global_test_preps': test_preps, # For partial
+        'submitted': submitted
     }
     return render(request, 'core/destination_detail.html', context)
 
@@ -120,11 +136,17 @@ def test_prep_detail(request, slug):
     services = Service.objects.all()
     test_preps = TestPrep.objects.all()
     
+    submitted = False
+    if request.method == 'POST':
+        submitted = True
+    
     context = {
         'test_prep': test_prep,
         'countries': countries, 
         'services': services, 
-        'test_preps': test_preps
+        'test_preps': test_preps,
+        'global_test_preps': test_preps, # For partial
+        'submitted': submitted
     }
     return render(request, 'core/test_prep_detail.html', context)
 
