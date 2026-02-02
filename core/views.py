@@ -115,11 +115,18 @@ def service_detail(request, slug):
     countries = Country.objects.all()
     services = Service.objects.all()
     test_preps = TestPrep.objects.all() 
+    
+    submitted = False
+    if request.method == 'POST':
+        submitted = True
+        
     context = {
         'service': service, 
         'countries': countries, 
         'services': services, 
-        'test_preps': test_preps
+        'test_preps': test_preps,
+        'global_test_preps': test_preps, # For partial
+        'submitted': submitted
     }
     return render(request, 'core/service_detail.html', context)
 

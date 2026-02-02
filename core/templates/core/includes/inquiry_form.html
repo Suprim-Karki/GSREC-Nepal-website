@@ -1,5 +1,5 @@
 <div class="contact-form-panel"
-    style="padding: 30px; background: white; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05);">
+    style="padding: 30px; background: white; border-radius: 20px; box-shadow: 0 15px 40px rgba(0,0,0,0.1);">
 
     {% if submitted %}
     <!-- Success Message -->
@@ -21,60 +21,75 @@
     <!-- Form -->
     <form method="POST" action="">
         {% csrf_token %}
+        <style>
+            .form-input-styled {
+                width: 100%;
+                padding: 12px;
+                border: 1px solid #e2e8f0;
+                border-radius: 8px;
+                height: 48px;
+                /* Consistent height */
+                box-sizing: border-box;
+                font-family: inherit;
+                font-size: 14px;
+            }
+
+            .form-label {
+                display: block;
+                font-size: 14px;
+                font-weight: 600;
+                color: var(--dark);
+                margin-bottom: 5px;
+            }
+        </style>
+
+        {% if not hide_title %}
         <h3 style="font-size: 24px; font-weight: 700; margin-bottom: 20px; color: var(--primary);">
             {{ form_title|default:"Quick Inquiry" }}
         </h3>
+        {% endif %}
 
         <!-- Name -->
         <div style="margin-bottom: 15px;">
-            <input type="text" name="name" required class="form-input" placeholder="Full Name *"
-                style="width: 100%; padding: 12px; border: 1px solid #e2e8f0; border-radius: 8px;">
+            <label class="form-label">Full Name <span style="color: #EF4444;">*</span></label>
+            <input type="text" name="name" required class="form-input-styled" placeholder="Full Name">
         </div>
 
         <!-- Phone -->
         <div style="margin-bottom: 15px;">
-            <input type="tel" name="phone" required class="form-input" placeholder="Phone Number *"
-                style="width: 100%; padding: 12px; border: 1px solid #e2e8f0; border-radius: 8px;">
+            <label class="form-label">Phone Number <span style="color: #EF4444;">*</span></label>
+            <input type="tel" name="phone" required class="form-input-styled" placeholder="Phone Number">
         </div>
 
         <!-- Email -->
         <div style="margin-bottom: 15px;">
-            <input type="email" name="email" class="form-input" placeholder="Email Address (Optional)"
-                style="width: 100%; padding: 12px; border: 1px solid #e2e8f0; border-radius: 8px;">
+            <label class="form-label">Email Address</label>
+            <input type="email" name="email" class="form-input-styled" placeholder="Email Address (Optional)">
         </div>
 
         <!-- Country Select -->
         <div style="margin-bottom: 15px;">
-            <select name="country" class="form-input"
-                style="width: 100%; padding: 12px; border: 1px solid #e2e8f0; border-radius: 8px; color: #475569;">
-                <option value="" disabled {% if not country %}selected{% endif %}>Interested Country</option>
+            <label class="form-label">Interested Country</label>
+            <select name="country" class="form-input-styled" style="color: #475569;">
+                <option value="" {% if not country %}selected{% endif %}></option>
                 {% for c in global_countries %}
-                {% if country %}
-                {% if country.slug == c.slug %}
+                {% if country and country.slug == c.slug %}
                 <option value="{{ c.slug }}" selected>{{ c.name }}</option>
                 {% else %}
                 <option value="{{ c.slug }}">{{ c.name }}</option>
                 {% endif %}
-                {% else %}
-                <option value="{{ c.slug }}">{{ c.name }}</option>
-                {% endif %}
                 {% endfor %}
-                <option value="other">Other</option>
             </select>
         </div>
 
         <!-- Test Prep Select -->
         <div style="margin-bottom: 15px;">
-            <select name="test_prep" class="form-input"
-                style="width: 100%; padding: 12px; border: 1px solid #e2e8f0; border-radius: 8px; color: #475569;">
-                <option value="" disabled {% if not test_prep %}selected{% endif %}>Test Preparation</option>
+            <label class="form-label">Test Preparation</label>
+            <select name="test_prep" class="form-input-styled" style="color: #475569;">
+                <option value="" {% if not test_prep %}selected{% endif %}></option>
                 {% for tp in global_test_preps %}
-                {% if test_prep %}
-                {% if test_prep.slug == tp.slug %}
+                {% if test_prep and test_prep.slug == tp.slug %}
                 <option value="{{ tp.slug }}" selected>{{ tp.name }}</option>
-                {% else %}
-                <option value="{{ tp.slug }}">{{ tp.name }}</option>
-                {% endif %}
                 {% else %}
                 <option value="{{ tp.slug }}">{{ tp.name }}</option>
                 {% endif %}
@@ -84,9 +99,10 @@
 
         <!-- Message -->
         <div style="margin-bottom: 20px;">
-            <textarea name="message" class="form-input"
-                style="width: 100%; padding: 12px; border: 1px solid #e2e8f0; border-radius: 8px; min-height: 100px; resize: none;"
-                placeholder="Tell us about your requirements... (Optional)"></textarea>
+            <label class="form-label">Additional Message</label>
+            <textarea name="message" class="form-input-styled"
+                style="height: auto; min-height: 100px; resize: vertical;"
+                placeholder="Tell us about your requirements..."></textarea>
         </div>
 
         <!-- Submit -->

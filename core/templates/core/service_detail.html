@@ -44,11 +44,8 @@
                 {% endif %}
             </div>
 
-            <div
-                style="background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); height: fit-content;">
-                <h4 style="font-size: 20px; font-weight: 700; margin-bottom: 20px;">Need this service?</h4>
-                <p style="margin-bottom: 20px; color: var(--gray);">Contact our experts today.</p>
-                <a href="{% url 'contact' %}" class="btn-primary" style="width: 100%;">Book Consultation</a>
+            <div style="position: sticky; top: 120px; height: fit-content;">
+                {% include 'core/includes/inquiry_form.html' with form_title="Book Consultation" %}
             </div>
         </div>
     </div>
