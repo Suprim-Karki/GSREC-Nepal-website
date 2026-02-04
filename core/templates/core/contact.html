@@ -30,7 +30,7 @@
                             <h5
                                 style="font-family: 'Poppins', sans-serif; font-weight: 800; color: #FFFFFF; text-shadow: 0 2px 4px rgba(0,0,0,0.2); font-size: 16px; margin-bottom: 5px;">
                                 Office</h5>
-                            <a href="https://maps.google.com/?q={{ site_settings.address|urlencode }}" target="_blank"
+                            <a href="{{ site_settings.address_link|default:'#' }}" target="_blank"
                                 class="interactive-link" style="opacity: 0.8; font-size: 14px; line-height: 1.6;">
                                 {{site_settings.address|linebreaksbr }}
                             </a>

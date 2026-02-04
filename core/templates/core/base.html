@@ -90,8 +90,8 @@
                             <div class="dropdown-divider"></div>
                             {% for test in global_test_preps %}
                             <a href="{% url 'test_prep_detail' test.slug %}" class="dropdown-item">
-                                <i class="fa-solid {{ test.icon_class }}"
-                                    style="color: var(--primary); width: 20px;"></i> {{ test.name }}
+                                <i class="{{ test.icon_class }}" style="color: var(--primary); width: 20px;"></i>
+                                {{test.name }}
                             </a>
                             {% endfor %}
                         </div>
@@ -192,7 +192,7 @@
 
                 <div>
                     <h4 class="footer-heading">{{ site_settings.footer_contact_title|default:"Contact" }}</h4>
-                    <a href="https://maps.google.com/?q={{ site_settings.address|urlencode }}" target="_blank"
+                    <a href="{{ site_settings.address_link|default:'#' }}" target="_blank"
                         class="interactive-link footer-contact-item" style="display: flex; gap: 10px; color: inherit;">
                         <i class="fa-solid fa-location-dot" style="margin-top: 4px;"></i>
                         {{ site_settings.address }}

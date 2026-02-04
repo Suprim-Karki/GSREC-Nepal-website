@@ -96,7 +96,7 @@ class TestPrep(models.Model):
     slug = models.SlugField(unique=True, blank=True)
     name = models.CharField(max_length=50, help_text="Short name e.g., IELTS")
     full_name = models.CharField(max_length=100)
-    icon_class = models.CharField(max_length=50)
+    icon_class = models.CharField(max_length=50, help_text="Full FontAwesome class, e.g., 'fa-solid fa-book' or 'fa-brands fa-duolingo'")
     intro = models.TextField()
     format_data = models.JSONField(default=list, help_text="List of format sections")
     score_scale = models.CharField(max_length=100)
@@ -119,7 +119,11 @@ class Testimonial(models.Model):
     university = models.CharField(max_length=100)
     quote = models.TextField()
     image = models.ImageField(upload_to='testimonials/', blank=True, null=True)
+    order = models.IntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-order', '-created_at']
 
     def __str__(self):
         return f"{self.name} - {self.university}"
@@ -161,6 +165,7 @@ class SiteSettings(models.Model):
     
     # Contact Info
     address = models.CharField(max_length=200, default="New Baneshwor, Kathmandu, Nepal")
+    address_link = models.URLField(blank=True, null=True, help_text="Direct Google Maps link for the address")
     phone = models.CharField(max_length=50, default="+977 1-4244XXX")
     email = models.EmailField(default="info@gsrecnepal.com")
     

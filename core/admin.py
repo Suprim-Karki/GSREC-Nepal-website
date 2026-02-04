@@ -45,7 +45,8 @@ class TestPrepAdmin(admin.ModelAdmin):
 
 @admin.register(Testimonial)
 class TestimonialAdmin(admin.ModelAdmin):
-    list_display = ('name', 'university')
+    list_display = ('name', 'university', 'order')
+    list_editable = ('order',)
 
 @admin.register(Resource)
 class ResourceAdmin(admin.ModelAdmin):

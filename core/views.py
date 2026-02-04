@@ -1,4 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.core.mail import send_mail
+from django.conf import settings
 from rest_framework import generics
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -52,7 +54,23 @@ def contact(request):
     contact_page = ContactPage.objects.first()
     submitted = False
     if request.method == 'POST':
-        # Handle form submission logic here (e.g. send email or save to DB)
+        name = request.POST.get('name')
+        email = request.POST.get('email', 'Not provided')
+        phone = request.POST.get('phone')
+        country = request.POST.get('country', 'Not specified')
+        test_prep = request.POST.get('test_prep', 'Not specified')
+        message = request.POST.get('message', '')
+
+        subject = f"New Inquiry from {name}"
+        body = f"Name: {name}\nEmail: {email}\nPhone: {phone}\nCountry: {country}\nTest Prep: {test_prep}\n\nMessage:\n{message}"
+        
+        send_mail(
+            subject,
+            body,
+            settings.DEFAULT_FROM_EMAIL,
+            [settings.CONTACT_EMAIL],
+            fail_silently=True,
+        )
         submitted = True
     
     # Context for form
@@ -92,6 +110,21 @@ def destination_detail(request, slug):
     
     submitted = False
     if request.method == 'POST':
+        name = request.POST.get('name')
+        email = request.POST.get('email', 'Not provided')
+        phone = request.POST.get('phone')
+        message = request.POST.get('message', '')
+        
+        subject = f"Destination Inquiry: {country.name} - {name}"
+        body = f"Customer Inquiry for Destination: {country.name}\n\nName: {name}\nEmail: {email}\nPhone: {phone}\n\nMessage:\n{message}"
+        
+        send_mail(
+            subject,
+            body,
+            settings.DEFAULT_FROM_EMAIL,
+            [settings.CONTACT_EMAIL],
+            fail_silently=True,
+        )
         submitted = True
         
     context = {
@@ -118,6 +151,21 @@ def service_detail(request, slug):
     
     submitted = False
     if request.method == 'POST':
+        name = request.POST.get('name')
+        email = request.POST.get('email', 'Not provided')
+        phone = request.POST.get('phone')
+        message = request.POST.get('message', '')
+        
+        subject = f"Service Inquiry: {service.title} - {name}"
+        body = f"Customer Inquiry for Service: {service.title}\n\nName: {name}\nEmail: {email}\nPhone: {phone}\n\nMessage:\n{message}"
+        
+        send_mail(
+            subject,
+            body,
+            settings.DEFAULT_FROM_EMAIL,
+            [settings.CONTACT_EMAIL],
+            fail_silently=True,
+        )
         submitted = True
         
     context = {
@@ -145,6 +193,21 @@ def test_prep_detail(request, slug):
     
     submitted = False
     if request.method == 'POST':
+        name = request.POST.get('name')
+        email = request.POST.get('email', 'Not provided')
+        phone = request.POST.get('phone')
+        message = request.POST.get('message', '')
+        
+        subject = f"Test Prep Inquiry: {test_prep.name} - {name}"
+        body = f"Customer Inquiry for Test Prep: {test_prep.name}\n\nName: {name}\nEmail: {email}\nPhone: {phone}\n\nMessage:\n{message}"
+        
+        send_mail(
+            subject,
+            body,
+            settings.DEFAULT_FROM_EMAIL,
+            [settings.CONTACT_EMAIL],
+            fail_silently=True,
+        )
         submitted = True
     
     context = {
@@ -167,8 +230,18 @@ def test_prep_register(request, slug):
         preferred_time = request.POST.get('preferred_time')
         message = request.POST.get('message')
         
-        # Here you could save to database, send email, etc.
-        # For now, we'll just redirect with success message
+        # Save to database or send email
+        subject = f"Test Prep Registration: {test_prep.name} - {name}"
+        body = f"New Registration for {test_prep.name}\n\nName: {name}\nPhone: {phone}\nEmail: {email}\nPreferred Time: {preferred_time}\n\nMessage:\n{message}"
+        
+        send_mail(
+            subject,
+            body,
+            settings.DEFAULT_FROM_EMAIL,
+            [settings.CONTACT_EMAIL],
+            fail_silently=True,
+        )
+
         from django.contrib import messages
         messages.success(request, f'Thank you {name}! We have received your registration for {test_prep.name}. Our team will contact you soon.')
         
