@@ -174,6 +174,8 @@ class SiteSettings(models.Model):
     twitter_link = models.URLField(blank=True, null=True)
     instagram_link = models.URLField(blank=True, null=True)
     linkedin_link = models.URLField(blank=True, null=True)
+    youtube_link = models.URLField(blank=True, null=True)
+    tiktok_link = models.URLField(blank=True, null=True)
 
     # Footer Headings
     footer_company_title = models.CharField(max_length=50, default="Company")

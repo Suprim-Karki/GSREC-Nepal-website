@@ -4,6 +4,20 @@ from .models import HeroSection, Country, Institution, Service, TestPrep, Testim
 @admin.register(SiteSettings)
 class SiteSettingsAdmin(admin.ModelAdmin):
     list_display = ('site_name',)
+    fieldsets = (
+        ('General Settings', {
+            'fields': ('site_name', 'logo', 'footer_logo', 'favicon', 'footer_description')
+        }),
+        ('Contact Information', {
+            'fields': ('address', 'address_link', 'phone', 'email')
+        }),
+        ('Social Media Links', {
+            'fields': ('facebook_link', 'twitter_link', 'instagram_link', 'linkedin_link', 'youtube_link', 'tiktok_link')
+        }),
+        ('Footer Headings', {
+            'fields': ('footer_company_title', 'footer_destinations_title', 'footer_contact_title')
+        }),
+    )
 
     def has_add_permission(self, request):
         if self.model.objects.exists():

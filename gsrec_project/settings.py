@@ -20,13 +20,25 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-br1=gtp)xy8aqtgxyeq#w=1)2=t3^29z@h=fwk1e6%dhvl%pff'
+SECRET_KEY = 'r^$-e($)f$^ujf@*b=@+jz&7yv^k0%)2c5mri^q0n21t7qj#jjk'
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
+# # --- SSL / HTTPS settings ---
+# SECURE_SSL_REDIRECT = True
+# SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+# SESSION_COOKIE_SECURE = True
+# CSRF_COOKIE_SECURE = True
+
+# # Only enable this if your site is served entirely over HTTPS
+# SECURE_HSTS_SECONDS = 31536000  # 1 year in seconds
+# SECURE_HSTS_INCLUDE_SUBDOMAINS = True  # optional, include all subdomains
+# SECURE_HSTS_PRELOAD = True  # optional, for preload list
 
 # Application definition
 
@@ -40,6 +52,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'core',
+    'django_extensions',
 ]
 
 MIDDLEWARE = [
@@ -138,7 +151,12 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Email Configuration
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'gsrecnepal@gmail.com'
+EMAIL_HOST_PASSWORD = 'pvto gmad glgy zjdf' 
 DEFAULT_FROM_EMAIL = 'gsrecnepal@gmail.com'
 CONTACT_EMAIL = 'gsrecnepal@gmail.com'
 

@@ -12,6 +12,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="{% static 'core/css/style.css' %}">
     <link rel="stylesheet" href="{% static 'core/css/components.css' %}">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-W8212GZRGK"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-W8212GZRGK');
+    </script>
     {% block extra_css %}{% endblock %}
 </head>
 
@@ -170,6 +179,14 @@
                         <a href="{{ site_settings.linkedin_link }}" target="_blank" class="social-icon"><i
                                 class="fa-brands fa-linkedin-in"></i></a>
                         {% endif %}
+                        {% if site_settings.youtube_link %}
+                        <a href="{{ site_settings.youtube_link }}" target="_blank" class="social-icon"><i
+                                class="fa-brands fa-youtube"></i></a>
+                        {% endif %}
+                        {% if site_settings.tiktok_link %}
+                        <a href="{{ site_settings.tiktok_link }}" target="_blank" class="social-icon"><i
+                                class="fa-brands fa-tiktok"></i></a>
+                        {% endif %}
                     </div>
                 </div>
 
@@ -212,7 +229,8 @@
 
             <div
                 style="text-align: center; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.05); color: #475569; font-size: 13px;">
-                &copy; 2008-<span id="currentYear"></span> GSREC Nepal. All rights reserved.
+                <a href="https://suprimkarki.com.np" style="color: inherit; text-decoration: none;">&copy;</a>
+                2008-<span id="currentYear"></span> GSREC Nepal. All rights reserved.
             </div>
         </div>
     </footer>
@@ -222,19 +240,35 @@
         document.getElementById('currentYear').textContent = new Date().getFullYear();
     </script>
     <script src="{% static 'core/js/main.js' %}"></script>
-        <!--Start of Tawk.to Script-->
-        <script type="text/javascript">
-        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-        (function(){
-        var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-        s1.async=true;
-        s1.src='https://embed.tawk.to/69708cee09380619819682b9/1jffqd187';
-        s1.charset='UTF-8';
-        s1.setAttribute('crossorigin','*');
-        s0.parentNode.insertBefore(s1,s0);
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+        (function () {
+            var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+            s1.async = true;
+            s1.src = 'https://embed.tawk.to/69708cee09380619819682b9/1jffqd187';
+            s1.charset = 'UTF-8';
+            s1.setAttribute('crossorigin', '*');
+            s0.parentNode.insertBefore(s1, s0);
         })();
-        </script>
+    </script>
     <!--End of Tawk.to Script-->
+    <script>
+        // Prevent Tawk.to from changing the page title
+        (function () {
+            var originalTitle = document.title;
+            var titleElement = document.querySelector('title');
+            if (titleElement) {
+                var titleObserver = new MutationObserver(function () {
+                    if (document.title !== originalTitle) {
+                        document.title = originalTitle;
+                    }
+                });
+                titleObserver.observe(titleElement, { childList: true, subtree: true, characterData: true });
+            }
+        })();
+    </script>
 </body>
 
 </html>
